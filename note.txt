@@ -1,0 +1,8 @@
+payment
+t&c
+
+
+admin
+- add product
+- edit price
+- check order

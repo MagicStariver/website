@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Música</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <header>
+        <h1>Música</h1>
+        <nav>
+            <ul class="center-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#product-list">Products</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <ul class="right-menu" id="user-menu">
+                <!-- before login -->
+                <li class="login"><a href="login.html">Login</a></li>
+                <!-- after login -->
+                <li class="user-menu hidden">
+                    <a href="#" id="userName">Username</a>
+                    <ul class="dropdown">
+                        <li><a href="profile.html">Profile</a></li>
+                        <li><a href="cart.html">Cart</a></li>
+                        <li><a href="settings.html">Settings</a></li>
+                        <li><a href="#" id="logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="banner">
+            <h2>Welcome to Música</h2>
+            <p>Your one-stop shop for musical instruments.</p>
+        </section>
+
+        <section class="search-products">
+            <h2>Products</h2>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search for products...">
+                <button id="searchButton">Search</button>
+            </div>
+
+            <div class="category-container">
+                <button class="category-button" data-category="all">View All</button>
+                <button class="category-button" data-category="acoustic-guitar">Acoustic Guitars</button>
+                <button class="category-button" data-category="electric-guitar">Electric Guitars</button>
+                <button class="category-button" data-category="piano">Pianos</button>
+                <button class="category-button" data-category="drum">Drums</button>
+                <button class="category-button" data-category="violin">Violins</button>
+                <button class="category-button" data-category="harmonica">Harmonicas</button>
+                <button class="category-button" data-category="flute">Flutes</button>
+                <button class="category-button" data-category="saxophone">Saxophones</button>
+                <button class="category-button" data-category="keyboard">Keyboards</button>
+                <button class="category-button" data-category="accordion">Accordions</button>
+                <button class="category-button" data-category="drum-set">Drum Sets</button>
+                <button class="category-button" data-category="viola">Violas</button>
+            </div>            
+
+            <div class="product-container">
+                <section id="product-list" class="product-list">
+                    <!-- Acoustic Guitars -->
+                    <div class="product" data-category="acoustic-guitar" data-name="Yamaha Acoustic Guitar">
+                        <img src="images/吉他.jpg" alt="Yamaha Acoustic Guitar">
+                        <h3>Yamaha Acoustic Guitar</h3>
+                        <p>Price: $150</p>
+                        <button class="buy-button">Buy Now</button>
+                    </div>
+                    <div class="product" data-category="acoustic-guitar" data-name="Gibson Acoustic Guitar">
+                        <img src="images/guitar.jpg" alt="Gibson Acoustic Guitar">
+                        <h3>Gibson Acoustic Guitar</h3>
+                        <p>Price: $250</p>
+                        <button class="buy-button">Buy Now</button>
+                    </div>
+                
+                    <!-- Electric Guitars -->
+                    <div class="product" data-category="electric-guitar" data-name="Fender Electric Guitar">
+                        <img src="images/electric-guitar.jpg" alt="Fender Electric Guitar">
+                        <h3>Fender Electric Guitar</h3>
+                        <p>Price: $300</p>
+                        <button class="buy-button">Buy Now</button>
+                    </div>
+                
+                    <!-- Pianos -->
+                    <div class="product" data-category="piano" data-name="Yamaha Piano">
+                        <img src="images/piano.jpg" alt="Yamaha Piano">
+                        <h3>Yamaha Piano</h3>
+                        <p>Price: $1000</p>
+                        <button class="buy-button">Buy Now</button>
+                    </div>
+                
+                    <!-- Drums -->
+                    <div class="product" data-category="drum" data-name="Pearl Drum Set">
+                        <img src="images/drum-set.jpg" alt="Pearl Drum Set">
+                        <h3>Pearl Drum Set</h3>
+                        <p>Price: $500</p>
+                        <button class="buy-button">Buy Now</button>
+                    </div>
+                
+                    <!-- Violins -->
+                    <div class="product" data-category="violin" data-name="Stradivarius Violin">
+                        <img src="images/violin.jpg" alt="Stradivarius Violin">
+                        <h3>Stradivarius Violin</h3>
+                        <p>Price: $300</p>
+                        <button class="buy-button">Buy Now</button>
+                    </div>
+                
+                    <!-- Harmonicas -->
+                    <div class="product" data-category="harmonica" data-name="Hohner Harmonica">
+                        <img src="images/harmonica.jpg" alt="Hohner Harmonica">
+                        <h3>Hohner Harmonica</h3>
+                        <p>Price: $50</p>
+                        <button class="buy-button">Buy Now</button>
+                    </div>
+                
+                    <!-- Flutes -->
+                    <div class="product" data-category="flute" data-name="Yamaha Flute">
+                        <img src="images/flute.jpg" alt="Yamaha Flute">
+                        <h3>Yamaha Flute</h3>
+                        <p>Price: $200</p>
+                        <button class="buy-button">Buy Now</button>
+                    </div>
+                
+                    <!-- Saxophones -->
+                    <div class="product" data-category="saxophone" data-name="Selmer Saxophone">
+                        <img src="images/saxophone.jpg" alt="Selmer Saxophone">
+                        <h3>Selmer Saxophone</h3>
+                        <p>Price: $800</p>
+                        <button class="buy-button">Buy Now</button>
+                    </div>
+                    
+                    <!-- Keyboards -->
+                    <div class="product" data-category="keyboard" data-name="Casio Keyboard">
+                        <img src="images/keyboard.jpg" alt="Casio Keyboard">
+                        <h3>Casio Keyboard</h3>
+                        <p>Price: $400</p>
+                        <button class="buy-button">Buy Now</button>
+                    </div>
+
+                    <!-- Accordions -->
+                    <div class="product" data-category="accordion" data-name="Hohner Accordion">
+                        <img src="images/accordion.jpg" alt="Hohner Accordion">
+                        <h3>Hohner Accordion</h3>
+                        <p>Price: $600</p>
+                        <button class="buy-button">Buy Now</button>
+                    </div>
+
+                    <!-- Violas -->
+                    <div class="product" data-category="viola" data-name="Viola">
+                        <img src="images/viola.jpg" alt="Viola">
+                        <h3>Viola</h3>
+                        <p>Price: $400</p>
+                        <button class="buy-button">Buy Now</button>
+                    </div>
+                    
+                    <!-- 可以添加更多产品 -->
+                </section>
+            </div>
+        </section>
+        <button id="back-to-top">Back to Top</button>
+    </main>
+    <footer>
+        <p>&copy; 2024 Música. All rights reserved.</p>
+    </footer>
+    <script src="scripts/main.js"></script>
+</body>
+</html>
