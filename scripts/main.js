@@ -1,5 +1,6 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // 选择元素
+document.addEventListener('DOMContentLoaded', () => {
+    const cartItemsContainer = document.getElementById('cart-items');
+    const totalPriceElement = document.getElementById('total-price');
     const buyButtons = document.querySelectorAll('.buy-button');
     const searchButton = document.getElementById('searchButton');
     const searchInput = document.getElementById('searchInput');
@@ -12,14 +13,53 @@ document.addEventListener('DOMContentLoaded', function() {
     const userNameElement = document.getElementById('userName');
     const logoutButton = document.getElementById('logout');
     const settingsLink = document.getElementById('settingsLink');
-    
-    updateLoginStatus();
 
+    updateLoginStatus();
+    
     // 用户菜单点击事件
     userNameElement.addEventListener('click', function(event) {
         event.preventDefault();
         userMenu.classList.toggle('show');
     });
+
+    // 处理购物车显示
+    function displayCart() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = '<p>Haven\'t chosen product</p>';
+            totalPriceElement.innerHTML = 'Total Price: $0.00';
+        } else {
+            let total = 0;
+            cartItemsContainer.innerHTML = cart.map(item => {
+                const price = parseFloat(item.price.replace('$', ''));
+                total += price;
+                return `
+                    <div class="cart-item">
+                        <div class="item-details">
+                            <h3>${item.name}</h3>
+                            <p>Price: ${item.price}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+    
+            totalPriceElement.innerHTML = `Total Price: $${total.toFixed(2)}`;
+        }
+    }
+
+    // 更新登录状态
+    function updateLoginStatus() {
+        let username = localStorage.getItem('username');
+        if (username) {
+            userNameElement.textContent = username;
+            userMenu.classList.remove('hidden');
+            loginMenu.classList.add('hidden');
+        } else {
+            userNameElement.textContent = 'Login';
+            userMenu.classList.add('hidden');
+            loginMenu.classList.remove('hidden');
+        }
+    }
     
     // 处理注销事件
     if (logoutButton) {
@@ -45,7 +85,21 @@ document.addEventListener('DOMContentLoaded', function() {
     // 购买按钮事件处理
     buyButtons.forEach(button => {
         button.addEventListener('click', function() {
-            alert('Thank you for your purchase!');
+            const productElement = button.closest('.product');
+            const productName = productElement.querySelector('h3').textContent;
+            const productPrice = productElement.querySelector('p').textContent;
+
+            const product = {
+                name: productName,
+                price: productPrice,
+            };
+
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push(product);
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            alert('Added to cart');
+            displayCart(); // 更新购物车显示
         });
     });
 
@@ -88,32 +142,4 @@ document.addEventListener('DOMContentLoaded', function() {
             document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         });
     }
-    
-    // 更新登录状态
-    function updateLoginStatus() {
-        let username = localStorage.getItem('username');
-        console.log('Username from localStorage:', username); // 添加此行进行调试
-        if (username) {
-            userNameElement.textContent = username;
-            userMenu.classList.remove('hidden');
-            loginMenu.classList.add('hidden');
-        } else {
-            userNameElement.textContent = 'Username';
-            userMenu.classList.add('hidden');
-            loginMenu.classList.remove('hidden');
-        }
-    }
-
-    // 以下代码添加了页面加载时动态更新用户信息的功能
-    const username = "JohnDoe"; // Replace with actual username from login
-    const email = "johndoe@example.com"; // Replace with actual email
-    const fullname = "John Doe"; // Replace with actual full name
-    const dob = "01/01/1990"; // Replace with actual date of birth
-    const address = "123 Main St, City, Country"; // Replace with actual address
-
-    document.getElementById('username').textContent = username;
-    document.getElementById('email').textContent = email;
-    document.getElementById('fullname').textContent = `Full Name: ${fullname}`;
-    document.getElementById('dob').textContent = `Birthday: ${dob}`;
-    document.getElementById('address').textContent = `Address: ${address}`;
 });

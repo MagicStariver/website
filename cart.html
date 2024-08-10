@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+    <title>Shopping Cart</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
     <header>
-        <h1>Música</h1>
+        <h1>Cart</h1>
         <nav>
             <ul class="center-menu">
                 <li><a href="index.html">Home</a></li>
@@ -32,23 +32,39 @@
             </ul>
         </nav>
     </header>
-    <div class="profile-container">
-        <div class="profile-card">
-            <div class="profile-details">
-                <h1 id="username">Username</h2>
-                <p id="email">email@example.com</p>
-                <p id="fullname">Full Name: John Doe</p>
-                <p id="dob">Birthday: 01/01/1990</p>
-                <p id="address">Address: 123 Main St, City, Country</p>
+    <main>
+        <section class="cart-container">
+            <h2>Your Cart</h2>
+            <div id="cart-items">
+                <!-- Products will be dynamically added here -->
             </div>
-        </div>
-        <div class="profile-actions">
-            <button id="edit-profile">Edit Profile</button>
-            <button id="change-password">Change Password</button>
-            <button id="view-orders">Order History</button>
-            <button id="logout">Logout</button>
-        </div>
-    </div>
+            <div class="cart-summary">
+                <h3>Order Summary</h3>
+                <p id="total-price">Total Price: $0.00</p>
+            </div>
+            <div class="payment-method">
+                <h3>Select Payment Method</h3>
+                <form id="payment-form">
+                    <label>
+                        <input type="radio" name="payment-method" value="credit-card" checked>
+                        Credit Card
+                    </label><br>
+                    <label>
+                        <input type="radio" name="payment-method" value="paypal">
+                        PayPal
+                    </label><br>
+                    <label>
+                        <input type="radio" name="payment-method" value="bank-transfer">
+                        Bank Transfer
+                    </label><br>
+                    <button type="submit" class="btn">Proceed to Checkout</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Música. All rights reserved.</p>
+    </footer>
     <script src="scripts/main.js"></script>
 </body>
 </html>
