@@ -13,12 +13,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const logoutButton = document.getElementById('logout');
     const settingsLink = document.getElementById('settingsLink');
     
-    updateLoginStatus()
+    updateLoginStatus();
 
     // 用户菜单点击事件
     userNameElement.addEventListener('click', function(event) {
-    event.preventDefault();
-    userMenu.classList.toggle('show');
+        event.preventDefault();
+        userMenu.classList.toggle('show');
     });
     
     // 处理注销事件
@@ -89,7 +89,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-
     // 更新登录状态
     function updateLoginStatus() {
         let username = localStorage.getItem('username');
@@ -105,9 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-});
-
-document.addEventListener('DOMContentLoaded', () => {
+    // 以下代码添加了页面加载时动态更新用户信息的功能
     const username = "JohnDoe"; // Replace with actual username from login
     const email = "johndoe@example.com"; // Replace with actual email
     const fullname = "John Doe"; // Replace with actual full name
@@ -119,6 +116,4 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('fullname').textContent = `Full Name: ${fullname}`;
     document.getElementById('dob').textContent = `Birthday: ${dob}`;
     document.getElementById('address').textContent = `Address: ${address}`;
-    
-    // Add event listeners for buttons if needed
 });
