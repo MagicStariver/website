@@ -1,0 +1,60 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+}
+
+.product-info {
+    text-align: center;
+    margin-right: 50px; /* Add some margin between product and tracking steps */
+}
+
+.product-info img {
+    width: 150px;
+    height: 150px;
+    background-color: #333;
+    margin-bottom: 10px;
+}
+
+.order-tracking {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.tracking-steps {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.tracking-step {
+    width: 200px;
+    height: 60px;
+    background-color: transparent;
+    border: 2px dashed #130505;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.tracking-step::after {
+    content: '';
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    width: 2px;
+    height: 30px;
+    background-color: #030102;
+    transform: translateX(-50%);
+}
+
+.tracking-step:last-child::after {
+    display: none;
+}
