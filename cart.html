@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/cart.css">
 </head>
 <body>
     <header>
@@ -33,37 +33,38 @@
         </nav>
     </header>
     <main>
-        <section class="cart-container">
-            <h2>Your Cart</h2>
-            <div id="cart-items">
-                <!-- Products will be dynamically added here -->
+        <div class="cart-item">
+            <input type="checkbox">
+            <img src="images/guitar.jpg" alt="Product Image" class="product-img">
+            <div class="product-details">
+                <p>Product name</p>
+                <p>RM 100.99</p>
             </div>
-            <div class="cart-summary">
-                <h3>Order Summary</h3>
-                <p id="total-price">Total Price: $0.00</p>
+            <div class="quantity-controls">
+                <button>-</button>
+                <span>1</span>
+                <button>+</button>
             </div>
-            <div class="payment-method">
-                <h3>Select Payment Method</h3>
-                <form id="payment-form">
-                    <label>
-                        <input type="radio" name="payment-method" value="credit-card" checked>
-                        Credit Card
-                    </label><br>
-                    <label>
-                        <input type="radio" name="payment-method" value="paypal">
-                        PayPal
-                    </label><br>
-                    <label>
-                        <input type="radio" name="payment-method" value="bank-transfer">
-                        Bank Transfer
-                    </label><br>
-                    <button type="submit" class="btn">Proceed to Checkout</button>
-                </form>
+        </div>
+        <div class="cart-item">
+            <input type="checkbox">
+            <img src="images/guitar.jpg" alt="Product Image" class="product-img">
+            <div class="product-details">
+                <p>Product name</p>
+                <p>RM 55.99</p>
             </div>
-        </section>
+            <div class="quantity-controls">
+                <button>-</button>
+                <span>1</span>
+                <button>+</button>
+            </div>
+        </div>
     </main>
     <footer>
-        <p>&copy; 2024 Música. All rights reserved.</p>
+        <div class="total">
+            <p>RM 100.99</p>
+        </div>
+        <button class="checkout">Check Out</button>
     </footer>
     <script src="scripts/main.js"></script>
 </body>
