@@ -1,6 +1,8 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import {getDatabase} from "firebase/database";
+// import { initializeApp } from "firebase/app";
+// import {getDatabase} from "firebase/database";
+import { getDatabase } from "node_modules/firebase/database/dist/index.cjs.js";
+import { initializeApp } from "/node_modules/firebase/app/dist/index.cjs.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
