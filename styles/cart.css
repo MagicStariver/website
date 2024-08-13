@@ -57,6 +57,41 @@ header nav ul li a {
     text-decoration: none;
 }
 
+.user-menu {
+    position: relative;
+}
+
+.user-menu .dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-menu .dropdown li {
+    padding: 10px;
+}
+
+.user-menu .dropdown li a {
+    color: #333;
+    text-decoration: none;
+}
+
+.user-menu .dropdown li a:hover {
+    background-color: #f4f4f4;
+}
+
+/* 显示用户菜单 */
+.user-menu.show .dropdown {
+    display: block;
+}
+
 main {
     padding: 20px;
 }
