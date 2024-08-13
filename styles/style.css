@@ -206,6 +206,18 @@ footer {
     margin: 0 5px; /* 按钮间距 */
 }
 
+.editprofile {
+    display: inline-block; /* 按钮在同一排显示 */
+    padding: 10px 114px;
+    font-size: 16px;
+    color: white;
+    background-color: #1d222c; /* 按钮背景色 */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none; /* 去除超链接下划线 */
+    margin: 0 5px; /* 按钮间距 */
+}
+
 .btn:hover {
     background-color: #606469; /* 鼠标悬停背景色 */
 }
