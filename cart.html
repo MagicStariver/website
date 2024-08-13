@@ -37,15 +37,15 @@
         <h1>Cart</h1>
         <div class="cart-item">
             <input type="checkbox">
-            <img src="images/guitar.jpg" alt="Product Image" class="product-img">
+            <img src="images/guitar.jpg" alt="Product Image" class="product-img" id="image">
             <div class="product-details">
-                <p>Product name</p>
-                <p>RM 100.99</p>
+                <p id="product_name">Product name</p>
+                <p id="price">RM 100.99</p>
             </div>
             <div class="quantity-controls">
-                <button>-</button>
-                <span>1</span>
-                <button>+</button>
+                <button id="subtract" >-</button>
+                <span id="amount">1</span>
+                <button id="add">+</button>
             </div>
         </div>
         <div class="cart-item">
@@ -69,5 +69,6 @@
         </div>
     </main>
     <script src="scripts/main.js"></script>
+    <script src="scripts/cart.js"></script>
 </body>
 </html>
