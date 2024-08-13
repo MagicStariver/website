@@ -1,6 +1,24 @@
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// const app = initializeApp(firebaseConfig);
+// const analytics = getAnalytics(app);
+import { db } from "scripts/firebase";
+import { ref, set, push, onValue } from "firebase/database";
+
+function writeUserData(username, email, phone, address, password) {
+    console.log('Writing data to Firebase...');
+    const data = push(ref(db, 'userdata'));
+    set(data, {
+      username: username,
+      email: email,
+      phone: phone,
+      address: address,
+      password: password,
+    }).then(() => {
+        console.log('Data saved successfully!');
+    }).catch((error) => {
+        console.error('Error saving data:', error);
+    });
+  }   
 
 document.addEventListener('DOMContentLoaded', function() {
     const registerForm = document.getElementById('registerForm');
@@ -21,24 +39,27 @@ document.addEventListener('DOMContentLoaded', function() {
             registerMessage.textContent = 'Passwords do not match!';
             registerMessage.style.color = 'red';
             return;
+        }else{
+            writeUserData(username, email, phone, address, password);
+            registerMessage.textContent = 'add success';
         }
 
         // 存储用户数据到 localStorage
-        const users = JSON.parse(localStorage.getItem('users')) || [];
-        const existingUser = users.find(user => user.username === username);
+        // const users = JSON.parse(localStorage.getItem('users')) || [];
+        // const existingUser = users.find(user => user.username === username);
 
-        if (existingUser) {
-            registerMessage.textContent = 'Username already exists!';
-            registerMessage.style.color = 'red';
-        } else {
-            users.push({ username, email, phone, address, password });
-            localStorage.setItem('users', JSON.stringify(users));
-            localStorage.setItem('username', username); // 存储当前用户名
-            registerMessage.textContent = 'Registration successful!';
-            registerMessage.style.color = 'green';
-            setTimeout(() => {
-                window.location.href = 'index.html'; // 注册成功后跳转到首页
-            }, 2000);
-        }
+        // if (existingUser) {
+        //     registerMessage.textContent = 'Username already exists!';
+        //     registerMessage.style.color = 'red';
+        // } else {
+        //     users.push({ username, email, phone, address, password });
+        //     localStorage.setItem('users', JSON.stringify(users));
+        //     localStorage.setItem('username', username); // 存储当前用户名
+        //     registerMessage.textContent = 'Registration successful!';
+        //     registerMessage.style.color = 'green';
+        //     setTimeout(() => {
+        //         window.location.href = 'index.html'; // 注册成功后跳转到首页
+        //     }, 2000);
+        // }
     });
 });
