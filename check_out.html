@@ -39,9 +39,9 @@
         <h1>Check Out</h1>
         <section class="checkout-info">
             <div class="user-details">
-                <p><strong>Name :</strong> yuan</p>
-                <p><strong>Address :</strong> 34, Jalan .......</p>
-                <p><strong>Phone :</strong> 1234567890</p>
+                <p id="name"><strong>Name :</strong> yuan</p>
+                <p id="address"><strong>Address :</strong> 34, Jalan .......</p>
+                <p id="phone"><strong>Phone :</strong> 1234567890</p>
             </div>
 
             <div class="product-details">
@@ -50,11 +50,11 @@
                         <img src="images/guitar.jpg" alt="Product Image">
                     </div>
                     <div class="product-description">
-                        <p>Product name</p>
-                        <p><strong>RM 100.99</strong></p>
+                        <p id="product_name">Product name</p>
+                        <p id="price"><strong>RM 100.99</strong></p>
                     </div>
                     <div class="product-quantity">
-                        <p>1</p>
+                        <p id="quantity">1</p>
                     </div>
                 </div>
             </div>
@@ -82,28 +82,27 @@
             <div class="price-summary">
                 <div class="subtotal">
                     <p>Subtotal</p>
-                    <p>RM 100.99</p>
+                    <p id="subtotal">RM 100.99</p>
                 </div>
                 <div class="shipping-fee">
                     <p>Shipping Fee</p>
-                    <p>RM 4.90</p>
+                    <p id="shipping_fee">RM 4.90</p>
                 </div>
                 <div class="total">
                     <p><strong>Total</strong></p>
-                    <p><strong>RM 105.89</strong></p>
+                    <p id="total"><strong>RM 105.89</strong></p>
                 </div>
             </div>
 
             <div class="checkout-button">
-                <button type="button">Check Out</button>
+                <button type="button" id="check_out">Check Out</button>
             </div>
         </section>
     </main>
     <footer>
         <p>&copy; 2024 Música. All rights reserved.</p>
     </footer>
-    <script src="scripts/main.js">
-
-    </script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/check_out.js"></script>
 </body>
 </html>
