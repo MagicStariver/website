@@ -59,6 +59,8 @@ header nav ul li a {
 
 main {
     flex: 1;
+    width: 1000px;
+    align-self: center;
     padding: 20px;
 }
 
