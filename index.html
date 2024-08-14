@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Música</title>
     <link rel="stylesheet" href="styles/style.css">
-    <!-- <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js" type="module"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js" type="module"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js" type="module"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js" type="module"></script>
 </head>
 <body>
     <header>
@@ -49,15 +49,27 @@
             </div>
 
             <div class="category-container" id="category">
-                <script>
+                <!-- <script type="module">
                     //get data from database and push into array
-                    category_array = ["View All"];
-                    category_array.push("Acoustic Guitars", "Electric Guitars"); //SELECT category FROM product
+                    // category_array = ["View All"];
+                    // category_array.push("Acoustic Guitars", "Electric Guitars"); //SELECT category FROM product
 
-                    for(i=0; i<category_array.length; i++) {
-                        document.getElementById('category').innerHTML += "<button class=\"category-button\" data-category=\""+category_array[i]+"\">"+category_array[i]+"</button>";
-                    }            
-                </script>
+                    // for(i=0; i<category_array.length; i++) {
+                    //     document.getElementById('category').innerHTML += "<button class=\"category-button\" data-category=\""+category_array[i]+"\">"+category_array[i]+"</button>";
+                    // }
+                    function displayCategories(categories) {
+                        const categoryContainer = document.getElementById('category');
+                        categoryContainer.innerHTML = ''; // Clear existing categories
+
+                        // Add "View All" option at the beginning
+                        categoryContainer.innerHTML += "<button class=\"category-button\" data-category=\"View All\">View All</button>";
+
+                        categories.forEach(category => {
+                            const categoryButton = `<button class="category-button" data-category="${category}">${category}</button>`;
+                            categoryContainer.innerHTML += categoryButton;
+                        });
+                    }
+                </script> -->
             </div>            
 
             <div class="product-container">
@@ -88,8 +100,19 @@
                                     id: key,
                                     ...data[key]
                                 }));
+
+                                const categories = new Set();
+                                products.forEach(product => {
+                                    if (product.category){
+                                        categories.add(product.category);
+                                    }
+                                })
+
+                                const uniqueCategories = Array.from(categories);
+                                displayCategories(uniqueCategories);
                                 displayProducts(products);
                             } else {
+                                displayCategories([]);
                                 displayProducts([]); // Display nothing if there's no data
                             }
                         });
