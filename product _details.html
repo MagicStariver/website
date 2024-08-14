@@ -6,7 +6,8 @@
     <title>Product Details</title>
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/product_details.css">
-    
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js" type="module"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js" type="module"></script>
 </head>
 
 <body>
@@ -40,11 +41,11 @@
 
         <div class="container">
             <!--id我帮你set好了，跟js里面的一样-->
-            <img id="product-image" src="images/guitar.jpg" alt="Product Name">
-            <h1 id="product-name">Yamaha Acoustic Guitar</h1>
+            <img id="product-image" alt="Product Name">
+            <h1 id="product-name"></h1>
             <h2>Description:</h2>
-            <p id="product-description">Discover rich tones and superb craftsmanship with the Yamaha Acoustic Guitar. Featuring a solid spruce top, mahogany body, and rosewood fretboard, it offers powerful sound and lasting durability—perfect for players of all levels.</p>
-            <p class="price" id="product-price">$150</p>
+            <p id="product-description"></p>
+            <p class="price" id="product-price"></p>
             <button type="button" id="add-to-cart">Add to cart</button>
             <a href="#" class="btn">Add to Cart</a>
             <a href="check_out.html" class="btn">Buy now</a>
@@ -55,7 +56,7 @@
         <p>&copy; 2024 Música. All rights reserved.</p>
     </footer>
     <script src="scripts/main.js"></script>
-    <script src="scripts/productDetails.js"></script>
+    <script type="module" src="scripts/productDetails.js"></script>
     
 </body>
 

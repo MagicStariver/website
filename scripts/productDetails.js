@@ -1,3 +1,22 @@
+//firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyAHW8gPuNSVstSV0ytE8oB5-_3PJKvxgMA",
+    authDomain: "muzica-93e9c.firebaseapp.com",
+    projectId: "muzica-93e9c",
+    storageBucket: "muzica-93e9c.appspot.com",
+    messagingSenderId: "559137569600",
+    appId: "1:559137569600:web:081ec42350a9f8099658a5",
+    measurementId: "G-G5MCSMD8H0",
+    databaseURL: "https://muzica-93e9c-default-rtdb.firebaseio.com/"
+};
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+
 document.addEventListener("DOMContentLoaded", function() {
     // Get the product ID from the URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -13,27 +32,49 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Function to fetch and display product details
 function loadProductDetails(productId) {
-    fetch(`product%20_details.html?id=${productId}`) 
-        .then(response => response.json())
-        .then(product => {
-            if (product.error) {
-                alert(product.error);
-                return;
-            }
+    console.log(productId);
+    const product_display = ref (db, '/product/' + productId);
+    onValue(product_display, (snapshot)=>{
+        const product = snapshot.val();
+        console.log(product);
+        if (!product) {
+            alert('Product not found!');
+            return;
+        }
+        // Display product details in HTML
+        document.getElementById('product-name').textContent = product.product_name;
+        console.log(product.product_name)
+        document.getElementById('product-description').textContent = product.product_details;
+        document.getElementById('product-price').textContent = `$${product.price}`;
+        document.getElementById('product-image').src = product.image_source;
+        document.getElementById('product-image').alt = product.product_name;
 
-            // Display product details in HTML 这里随便你改，id对了的
-            document.getElementById('product-name').textContent = product.name;
-            document.getElementById('product-description').textContent = product.description;
-            document.getElementById('product-price').textContent = `$${product.price}`;
-            document.getElementById('product-image').src = `images/${product.image}`;
-            document.getElementById('product-image').alt = product.name;
-
-            // Store the product details to use when adding to cart
-            document.getElementById('add-to-cart').dataset.product = JSON.stringify(product);
-        })
-        .catch(error => {
-            console.error('Error fetching product details:', error);
-        });
+        // Store the product details to use when adding to cart
+        document.getElementById('add-to-cart').dataset.product = JSON.stringify(product);
+    }, 
+    (error) => {
+        console.error('Error fetching product details:', error);
+        alert('Could not load product details.');
+    });
+    // fetch(`product%20_details.html?id=${productId}`) 
+    //     .then(response => response.json())
+    //     .then(product => {
+    //         if (product.error) {
+    //             alert(product.error);
+    //             return;
+    //         }
+    //         // Display product details in HTML 这里随便你改，id对了的
+    //         // document.getElementById('product-name').textContent = product.name;
+    //         // document.getElementById('product-description').textContent = product.description;
+    //         // document.getElementById('product-price').textContent = `$${product.price}`;
+    //         // document.getElementById('product-image').src = `images/${product.image}`;
+    //         // document.getElementById('product-image').alt = product.name;
+    //         // Store the product details to use when adding to cart
+    //         document.getElementById('add-to-cart').dataset.product = JSON.stringify(product);
+    //     })
+    //     .catch(error => {
+    //         console.error('Error fetching product details:', error);
+    //     });
 }
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -68,7 +109,7 @@ function buyNow() {
 
 // Attach event listeners to buttons
 document.addEventListener('DOMContentLoaded', () => {
-    const productId = 1; // Replace with dynamic product ID if necessary
+    //const productId = 1; // Replace with dynamic product ID if necessary
     loadProductDetails(productId);
 
     const addToCartButton = document.getElementById('add-to-cart');
