@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Música</title>
     <link rel="stylesheet" href="styles/style.css">
+    <!-- <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js" type="module"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js" type="module"></script> -->
 </head>
-
 <body>
     <header>
         <h1>Música</h1>
@@ -48,120 +48,71 @@
                 <button id="searchButton">Search</button>
             </div>
 
-            <div class="category-container">
-                <button class="category-button" data-category="all">View All</button>
-                <button class="category-button" data-category="acoustic-guitar">Acoustic Guitars</button>
-                <button class="category-button" data-category="electric-guitar">Electric Guitars</button>
-                <button class="category-button" data-category="piano">Pianos</button>
-                <button class="category-button" data-category="drum">Drums</button>
-                <button class="category-button" data-category="violin">Violins</button>
-                <button class="category-button" data-category="harmonica">Harmonicas</button>
-                <button class="category-button" data-category="flute">Flutes</button>
-                <button class="category-button" data-category="saxophone">Saxophones</button>
-                <button class="category-button" data-category="keyboard">Keyboards</button>
-                <button class="category-button" data-category="accordion">Accordions</button>
-                <button class="category-button" data-category="drum-set">Drum Sets</button>
-                <button class="category-button" data-category="viola">Violas</button>
-                
+            <div class="category-container" id="category">
+                <script>
+                    //get data from database and push into array
+                    category_array = ["View All"];
+                    category_array.push("Acoustic Guitars", "Electric Guitars"); //SELECT category FROM product
+
+                    for(i=0; i<category_array.length; i++) {
+                        document.getElementById('category').innerHTML += "<button class=\"category-button\" data-category=\""+category_array[i]+"\">"+category_array[i]+"</button>";
+                    }            
+                </script>
             </div>            
 
             <div class="product-container">
                 <section id="product-list" class="product-list">
-                    <!-- Acoustic Guitars -->
-                    <div class="product" data-category="acoustic-guitar" data-name="Yamaha Acoustic Guitar">
-                        <img src="images/guitar.jpg" alt="Yamaha Acoustic Guitar">
-                        <h3>Yamaha Acoustic Guitar</h3>
-                        <p>Price: $150</p>
-                        <button class="buy-button" data-product-id="1">Buy Now</button>
-                    </div>
-                    <div class="product" data-category="acoustic-guitar" data-name="Gibson Acoustic Guitar">
-                        <img src="images/guitar.jpg" alt="Gibson Acoustic Guitar">
-                        <h3>Gibson Acoustic Guitar</h3>
-                        <p>Price: $250</p>
-                        <button class="buy-button" data-product-id="2">Buy Now</button>
-                    </div>
-                
-                    <!-- Electric Guitars -->
-                    <div class="product" data-category="electric-guitar" data-name="Fender Electric Guitar">
-                        <img src="images/electric-guitar.jpg" alt="Fender Electric Guitar">
-                        <h3>Fender Electric Guitar</h3>
-                        <p>Price: $300</p>
-                        <button class="buy-button" data-product-id="3">Buy Now</button>
-                    </div>
-                
-                    <!-- Pianos -->
-                    <div class="product" data-category="piano" data-name="Yamaha Piano">
-                        <img src="images/piano.jpg" alt="Yamaha Piano">
-                        <h3>Yamaha Piano</h3>
-                        <p>Price: $1000</p>
-                        <button class="buy-button" data-product-id="4">Buy Now</button>
-                    </div>
-                
-                    <!-- Drums -->
-                    <div class="product" data-category="drum" data-name="Pearl Drum Set">
-                        <img src="images/drum-set.jpg" alt="Pearl Drum Set">
-                        <h3>Pearl Drum Set</h3>
-                        <p>Price: $500</p>
-                        <button class="buy-button" data-product-id="5">Buy Now</button>
-                    </div>
-                
-                    <!-- Violins -->
-                    <div class="product" data-category="violin" data-name="Stradivarius Violin">
-                        <img src="images/violin.jpg" alt="Stradivarius Violin">
-                        <h3>Stradivarius Violin</h3>
-                        <p>Price: $300</p>
-                        <button class="buy-button" data-product-id="6">Buy Now</button>
-                    </div>
-                
-                    <!-- Harmonicas -->
-                    <div class="product" data-category="harmonica" data-name="Hohner Harmonica">
-                        <img src="images/harmonica.jpg" alt="Hohner Harmonica">
-                        <h3>Hohner Harmonica</h3>
-                        <p>Price: $50</p>
-                        <button class="buy-button" data-product-id="7">Buy Now</button>
-                    </div>
-                
-                    <!-- Flutes -->
-                    <div class="product" data-category="flute" data-name="Yamaha Flute">
-                        <img src="images/flute.jpg" alt="Yamaha Flute">
-                        <h3>Yamaha Flute</h3>
-                        <p>Price: $200</p>
-                        <button class="buy-button" data-product-id="8">Buy Now</button>
-                    </div>
-                
-                    <!-- Saxophones -->
-                    <div class="product" data-category="saxophone" data-name="Selmer Saxophone">
-                        <img src="images/saxophone.jpg" alt="Selmer Saxophone">
-                        <h3>Selmer Saxophone</h3>
-                        <p>Price: $800</p>
-                        <button class="buy-button" data-product-id="9">Buy Now</button>
-                    </div>
-                    
-                    <!-- Keyboards -->
-                    <div class="product" data-category="keyboard" data-name="Casio Keyboard">
-                        <img src="images/keyboard.jpg" alt="Casio Keyboard">
-                        <h3>Casio Keyboard</h3>
-                        <p>Price: $400</p>
-                        <button class="buy-button" data-product-id="10">Buy Now</button>
-                    </div>
+                    <script type="module">
+                        const firebaseConfig = {
+                            apiKey: "AIzaSyAHW8gPuNSVstSV0ytE8oB5-_3PJKvxgMA",
+                            authDomain: "muzica-93e9c.firebaseapp.com",
+                            projectId: "muzica-93e9c",
+                            storageBucket: "muzica-93e9c.appspot.com",
+                            messagingSenderId: "559137569600",
+                            appId: "1:559137569600:web:081ec42350a9f8099658a5",
+                            measurementId: "G-G5MCSMD8H0",
+                            databaseURL: "https://muzica-93e9c-default-rtdb.firebaseio.com/"
+                        };
 
-                    <!-- Accordions -->
-                    <div class="product" data-category="accordion" data-name="Hohner Accordion">
-                        <img src="images/accordion.jpg" alt="Hohner Accordion">
-                        <h3>Hohner Accordion</h3>
-                        <p>Price: $600</p>
-                        <button class="buy-button" data-product-id="11">Buy Now</button>
-                    </div>
+                        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+                        import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
-                    <!-- Violas -->
-                    <div class="product" data-category="viola" data-name="Viola">
-                        <img src="images/viola.jpg" alt="Viola">
-                        <h3>Viola</h3>
-                        <p>Price: $400</p>
-                        <button class="buy-button" data-product-id="12">Buy Now</button>
-                    </div>
+                        const app = initializeApp(firebaseConfig);
+                        const db = getDatabase(app);
+
+                        const product_list = ref(db, '/product');
+                        onValue(product_list, (snapshot) => {
+                            const data = snapshot.val();
+                            if (data) {
+                                const products = Object.keys(data).map(key => ({
+                                    id: key,
+                                    ...data[key]
+                                }));
+                                displayProducts(products);
+                            } else {
+                                displayProducts([]); // Display nothing if there's no data
+                            }
+                        });
+
+                        // Simulate fetching data from the database
+                       
+                        function displayProducts(products){
+                            const productContainer = document.getElementById("product-list");
                     
-                    <!-- 可以添加更多产品 -->
+                            // Loop through the products array to generate HTML content
+                            products.forEach(product => {
+                                const productDiv = `
+                                    <div class="product" data-category="${product.category}" data-name="${product.product_name}">
+                                        <img src="${product.image_source}" alt="${product.product_name}">
+                                        <h3>${product.product_name}</h3>
+                                        <p>Price: ${product.price}</p>
+                                        <button class="buy-button" data-product-id="${product.id}">Buy Now</button>
+                                    </div>
+                                `;
+                                productContainer.innerHTML += productDiv;
+                            });
+                        }
+                    </script>
                 </section>
             </div>
         </section>
@@ -170,7 +121,7 @@
     <footer>
         <p>&copy; 2024 Música. All rights reserved.</p>
     </footer>
-    <script src="scripts/main.js"></script>
-    <script src="scripts/firebase.js"></script>
+    <script type="module" src="scripts/main.js"></script>
+    <!-- <script src="scripts/firebase.js"></script> -->
 </body>
 </html>
