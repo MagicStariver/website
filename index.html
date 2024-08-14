@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Música</title>
     <link rel="stylesheet" href="styles/style.css">
+    <!-- <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js" type="module"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js" type="module"></script> -->
 </head>
 <body>
     <header>
@@ -60,42 +62,56 @@
 
             <div class="product-container">
                 <section id="product-list" class="product-list">
-                    <script>
-                        // Simulate fetching data from the database
-                        const products = [
-                            {
-                                category: "Acoustic Guitars",
-                                name: "Yamaha Acoustic Guitar",
-                                imgSrc: "images/guitar.jpg",
-                                altText: "Yamaha Acoustic Guitar",
-                                price: "$150",
-                                productId: 1
-                            },
-                            {
-                                category: "Acoustic Guitars",
-                                name: "Gibson Acoustic Guitar",
-                                imgSrc: "images/guitar.jpg",
-                                altText: "Gibson Acoustic Guitar",
-                                price: "$250",
-                                productId: 2
+                    <script type="module">
+                        const firebaseConfig = {
+                            apiKey: "AIzaSyAHW8gPuNSVstSV0ytE8oB5-_3PJKvxgMA",
+                            authDomain: "muzica-93e9c.firebaseapp.com",
+                            projectId: "muzica-93e9c",
+                            storageBucket: "muzica-93e9c.appspot.com",
+                            messagingSenderId: "559137569600",
+                            appId: "1:559137569600:web:081ec42350a9f8099658a5",
+                            measurementId: "G-G5MCSMD8H0",
+                            databaseURL: "https://muzica-93e9c-default-rtdb.firebaseio.com/"
+                        };
+
+                        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+                        import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+
+                        const app = initializeApp(firebaseConfig);
+                        const db = getDatabase(app);
+
+                        const product_list = ref(db, '/product');
+                        onValue(product_list, (snapshot) => {
+                            const data = snapshot.val();
+                            if (data) {
+                                const products = Object.keys(data).map(key => ({
+                                    id: key,
+                                    ...data[key]
+                                }));
+                                displayProducts(products);
+                            } else {
+                                displayProducts([]); // Display nothing if there's no data
                             }
-                            <!-- 可以添加更多产品 -->
-                        ];
-                        
-                        const productContainer = document.getElementById("product-list");
-                    
-                        // Loop through the products array to generate HTML content
-                        products.forEach(product => {
-                            const productDiv = `
-                                <div class="product" data-category="${product.category}" data-name="${product.name}">
-                                    <img src="${product.imgSrc}" alt="${product.altText}">
-                                    <h3>${product.name}</h3>
-                                    <p>Price: ${product.price}</p>
-                                    <button class="buy-button" data-product-id="${product.productId}">Buy Now</button>
-                                </div>
-                            `;
-                            productContainer.innerHTML += productDiv;
                         });
+
+                        // Simulate fetching data from the database
+                       
+                        function displayProducts(products){
+                            const productContainer = document.getElementById("product-list");
+                    
+                            // Loop through the products array to generate HTML content
+                            products.forEach(product => {
+                                const productDiv = `
+                                    <div class="product" data-category="${product.category}" data-name="${product.product_name}">
+                                        <img src="${product.image_source}" alt="${product.product_name}">
+                                        <h3>${product.product_name}</h3>
+                                        <p>Price: ${product.price}</p>
+                                        <button class="buy-button" data-product-id="${product.id}">Buy Now</button>
+                                    </div>
+                                `;
+                                productContainer.innerHTML += productDiv;
+                            });
+                        }
                     </script>
                 </section>
             </div>
