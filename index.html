@@ -48,95 +48,10 @@
                 <button id="searchButton">Search</button>
             </div>
 
-            <div class="category-container" id="category">
-                <script>
-                    //get data from database and push into array
-                    // category_array = ["View All"];
-                    // category_array.push("Acoustic Guitars", "Electric Guitars"); //SELECT category FROM product
-
-                    // for(i=0; i<category_array.length; i++) {
-                    //     document.getElementById('category').innerHTML += "<button class=\"category-button\" data-category=\""+category_array[i]+"\">"+category_array[i]+"</button>";
-                    // }
-                    function displayCategories(categories) {
-                        const categoryContainer = document.getElementById('category');
-                        categoryContainer.innerHTML = ''; // Clear existing categories
-
-                        // Add "View All" option at the beginning
-                        categoryContainer.innerHTML += "<button class=\"category-button\" data-category=\"View All\">View All</button>";
-
-                        categories.forEach(category => {
-                            const categoryButton = `<button class="category-button" data-category="${category}">${category}</button>`;
-                            categoryContainer.innerHTML += categoryButton;
-                        });
-                    }
-                </script>
-            </div>            
+            <div class="category-container" id="category"></div>
 
             <div class="product-container">
-                <section id="product-list" class="product-list">
-                    <script type="module">
-                        const firebaseConfig = {
-                            apiKey: "AIzaSyAHW8gPuNSVstSV0ytE8oB5-_3PJKvxgMA",
-                            authDomain: "muzica-93e9c.firebaseapp.com",
-                            projectId: "muzica-93e9c",
-                            storageBucket: "muzica-93e9c.appspot.com",
-                            messagingSenderId: "559137569600",
-                            appId: "1:559137569600:web:081ec42350a9f8099658a5",
-                            measurementId: "G-G5MCSMD8H0",
-                            databaseURL: "https://muzica-93e9c-default-rtdb.firebaseio.com/"
-                        };
-
-                        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-                        import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
-
-                        const app = initializeApp(firebaseConfig);
-                        const db = getDatabase(app);
-
-                        const product_list = ref(db, '/product');
-                        onValue(product_list, (snapshot) => {
-                            const data = snapshot.val();
-                            if (data) {
-                                const products = Object.keys(data).map(key => ({
-                                    id: key,
-                                    ...data[key]
-                                }));
-                                const categories = new Set(products.map(product => product.category));
-
-                                displayCategories(Array.from(categories));
-                                displayProducts(products);
-                            } else {
-                                displayCategories([]);
-                                displayProducts([]); // Display nothing if there's no data
-                            }
-                        });
-
-                        // Simulate fetching data from the database
-                        function displayProducts(products){
-                            const productContainer = document.getElementById("product-list");
-                            productContainer.innerHTML = ''; // Clear previous content
-                            // Loop through the products array to generate HTML content
-                            products.forEach(product => {
-                                const productDiv = `
-                                    <div class="product" data-category="${product.category}" data-name="${product.product_name}">
-                                        <img src="${product.image_source}" alt="${product.product_name}">
-                                        <h3>${product.product_name}</h3>
-                                        <p>Price: ${product.price}</p>
-                                        <button class="buy-button" data-product-id="${product.id}">View Details</button>
-                                    </div>
-                                `;
-                                productContainer.innerHTML += productDiv;
-                            });
-
-                            const buyButtons = document.querySelectorAll('.buy-button');
-                            buyButtons.forEach(button => {
-                                button.addEventListener('click', function() {
-                                    const productId = this.getAttribute('data-product-id');
-                                    location.href="product%20_details.html?id=" + productId;
-                                });
-                            });
-                        }
-                    </script>
-                </section>
+                <section id="product-list" class="product-list"></section>
             </div>
         </section>
         <button id="back-to-top">Back to Top</button>
@@ -144,7 +59,94 @@
     <footer>
         <p>&copy; 2024 Música. All rights reserved.</p>
     </footer>
-    <script type="module" src="scripts/main.js"></script>
-    <!-- <script src="scripts/firebase.js"></script> -->
+    <script type="module">
+        const firebaseConfig = {
+            apiKey: "AIzaSyAHW8gPuNSVstSV0ytE8oB5-_3PJKvxgMA",
+            authDomain: "muzica-93e9c.firebaseapp.com",
+            projectId: "muzica-93e9c",
+            storageBucket: "muzica-93e9c.appspot.com",
+            messagingSenderId: "559137569600",
+            appId: "1:559137569600:web:081ec42350a9f8099658a5",
+            measurementId: "G-G5MCSMD8H0",
+            databaseURL: "https://muzica-93e9c-default-rtdb.firebaseio.com/"
+        };
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        const product_list = ref(db, '/product');
+        onValue(product_list, (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                const products = Object.keys(data).map(key => ({
+                    id: key,
+                    ...data[key]
+                }));
+                const categories = new Set(products.map(product => product.category));
+
+                displayCategories(Array.from(categories));
+                displayProducts(products);
+
+                // Attach event listeners to category buttons
+                const categoryButtons = document.querySelectorAll('.category-button');
+                categoryButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const selectedCategory = this.getAttribute('data-category');
+                        if (selectedCategory === "View All") {
+                            displayProducts(products);
+                        } else {
+                            const filteredProducts = products.filter(product => product.category === selectedCategory);
+                            displayProducts(filteredProducts);
+                        }
+                    });
+                });
+            } else {
+                displayCategories([]);
+                displayProducts([]); // Display nothing if there's no data
+            }
+        });
+
+        function displayCategories(categories) {
+            const categoryContainer = document.getElementById('category');
+            categoryContainer.innerHTML = ''; // Clear existing categories
+
+            // Add "View All" option at the beginning
+            categoryContainer.innerHTML += "<button class=\"category-button\" data-category=\"View All\">View All</button>";
+
+            categories.forEach(category => {
+                const categoryButton = `<button class="category-button" data-category="${category}">${category}</button>`;
+                categoryContainer.innerHTML += categoryButton;
+            });
+        }
+
+        function displayProducts(products) {
+            const productContainer = document.getElementById("product-list");
+            productContainer.innerHTML = ''; // Clear previous content
+
+            // Loop through the products array to generate HTML content
+            products.forEach(product => {
+                const productDiv = `
+                    <div class="product" data-category="${product.category}" data-name="${product.product_name}">
+                        <img src="${product.image_source}" alt="${product.product_name}">
+                        <h3>${product.product_name}</h3>
+                        <p>Price: ${product.price}</p>
+                        <button class="buy-button" data-product-id="${product.id}">View Details</button>
+                    </div>
+                `;
+                productContainer.innerHTML += productDiv;
+            });
+
+            const buyButtons = document.querySelectorAll('.buy-button');
+            buyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-product-id');
+                    location.href="product_details.html?id=" + productId;
+                });
+            });
+        }
+    </script>
 </body>
 </html>
