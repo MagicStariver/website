@@ -111,9 +111,11 @@
                         });
 
                         // Simulate fetching data from the database
+                       
                         function displayProducts(products){
                             const productContainer = document.getElementById("product-list");
-                    
+                            productContainer.innerHTML = ''; // Clear previous content
+
                             // Loop through the products array to generate HTML content
                             products.forEach(product => {
                                 const productDiv = `
@@ -121,32 +123,10 @@
                                         <img src="${product.image_source}" alt="${product.product_name}">
                                         <h3>${product.product_name}</h3>
                                         <p>Price: ${product.price}</p>
-                                        <button class="buy-button" data-product-id="${product.id}">View Details</button>
+                                        <button class="buy-button" data-id="${product.id}">View Details</button>
                                     </div>
                                 `;
                                 productContainer.innerHTML += productDiv;
-                            });
-
-                            const buyButtons = document.querySelectorAll('.buy-button');
-                            buyButtons.forEach(button => {
-                                button.addEventListener('click', function() {
-                                    const productElement = button.closest('.product');
-                                    const productName = productElement.querySelector('h3').textContent;
-                                    const productPrice = productElement.querySelector('p').textContent;
-
-                                    const product = {
-                                        name: productName,
-                                        price: productPrice,
-                                    };
-
-                                    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-                                    cart.push(product);
-                                    localStorage.setItem('cart', JSON.stringify(cart));
-
-                                    alert('Added to cart');
-                                    location.href = "product_details.html";
-                                    displayCart(); // Update the cart display
-                                });
                             });
                         }
                     </script>
