@@ -26,9 +26,10 @@ subtractButton.addEventListener('click', function(event) {
 
 
 check_outButtons.addEventListener('click', function(event) {
-    alert("fgdhsj");
+    alert("check out");
     //const productId = this.getAttribute('data-product-id');
-    //location.href="product%20_details.html?id=" + productId;
+    //location.href="check_out.html?id=" + cartId; 这里的cart id need database
+    location.href="check_out.html";
 });
 
 
