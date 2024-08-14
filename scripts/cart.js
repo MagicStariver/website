@@ -2,23 +2,34 @@ subtractButton = document.getElementById("subtract");
 addButton = document.getElementById("add");
 amount = document.getElementById("amount");
 check_outButtons = document.getElementById("checkout");
+total_price = document.getElementById("total-price");
+
+const originalPrice = parseFloat(total_price.innerHTML.replace("RM", ""));
 
 addButton.addEventListener('click', function(event) {
-    count = parseInt(amount.innerHTML);
-    amount.innerHTML= count +=1;
+    let count = parseInt(amount.innerHTML);
+    count += 1;
+    amount.innerHTML = count;
+    const newTotal = originalPrice * count;
+    total_price.innerHTML = "RM" + newTotal.toFixed(2);
 });
 
 subtractButton.addEventListener('click', function(event) {
-    count = parseInt(amount.innerHTML);
-    if (count > 1){
-        amount.innerHTML= count -=1;
+    let count = parseInt(amount.innerHTML);
+    if (count > 1) {
+        count -= 1;
+        amount.innerHTML = count;
+        const newTotal = originalPrice * count;
+        total_price.innerHTML = "RM" + newTotal.toFixed(2);
     }
 });
 
+
 check_outButtons.addEventListener('click', function(event) {
-    alert("fgdhsj");
+    alert("check out");
     //const productId = this.getAttribute('data-product-id');
-    //location.href="product%20_details.html?id=" + productId;
+    //location.href="check_out.html?id=" + cartId; 这里的cart id need database
+    location.href="check_out.html";
 });
 
 
@@ -48,4 +59,5 @@ function displayProducts(products) {
         listContainer.innerHTML += Div;
     });
 }
+
 

@@ -83,6 +83,7 @@ if (productId) {
     loadProductDetails(productId);
 }
 
+/*
 // Function to handle adding the product to the cart
 function addToCart() {
     // Retrieve product details from the button's data attribute
@@ -100,12 +101,15 @@ function addToCart() {
     alert("Product added to cart!");
     
 }
+*/
 
+/*
 // Function to handle purchasing the product
 function buyNow() {
     alert("Proceed to checkout!");
     // You can redirect to a checkout page or process payment
 }
+    */
 
 // Attach event listeners to buttons
 document.addEventListener('DOMContentLoaded', () => {
@@ -116,12 +120,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const buyNowButton = document.getElementById('buy-now');
     
     addToCartButton.addEventListener('click', function(event) {
-        event.preventDefault();
-        addToCart.call(this);
+        //insert into cart item DATABASE 放这边
+        location.href="cart.html?id=" + productId;
     });
     
     buyNowButton.addEventListener('click', (event) => {
-        event.preventDefault();
-        buyNow();
+        location.href="check_out.html?id=" + productId;
     });
 });
+
