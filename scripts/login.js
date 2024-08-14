@@ -1,3 +1,20 @@
+const firebaseConfig = {
+    apiKey: "AIzaSyAHW8gPuNSVstSV0ytE8oB5-_3PJKvxgMA",
+    authDomain: "muzica-93e9c.firebaseapp.com",
+    projectId: "muzica-93e9c",
+    storageBucket: "muzica-93e9c.appspot.com",
+    messagingSenderId: "559137569600",
+    appId: "1:559137569600:web:081ec42350a9f8099658a5",
+    measurementId: "G-G5MCSMD8H0",
+    databaseURL: "https://muzica-93e9c-default-rtdb.firebaseio.com/"
+};
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
 document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('loginForm');
     const loginMessage = document.getElementById('loginMessage');
@@ -10,26 +27,49 @@ document.addEventListener('DOMContentLoaded', function() {
             const password = loginForm.password.value.trim();
 
             // 通过用户名和密码查找用户
-            const dbRef = ref(database);
-            get(child(dbRef, `users/${username}`)).then((snapshot) => {
-                if (snapshot.exists() && snapshot.val().password === password) {
-                    loginMessage.textContent = 'Login successful!';
-                    loginMessage.style.color = 'green';
+            const dbRef = ref(db, '/userdata/' + username);
+            onValue(dbRef, (snapshot)=>{
+                if (snapshot.exists()) {  
+                    const userData = snapshot.val();  
+            
+                    // Compare entered password with stored password  
+                    const storedPassword = userData.password;  
+                    if (password === storedPassword) {  
+                        console.log('Login successful!');  
+                        // Redirect to homepage or perform necessary login success actions  
+                        window.location.href = `index.html?username=${encodeURIComponent(username)}`;   
+                    } else {  
+                        console.log('Incorrect password!');  
+                        // Notify user about incorrect password  
+                        registerMessage.textContent = 'Incorrect password!';  
+                        registerMessage.style.color = 'red';  
+                    }  
+                } else {  
+                    console.log('User not found!');  
+                    // Notify user about non-existing username  
+                    registerMessage.textContent = 'User not found!';  
+                    registerMessage.style.color = 'red';  
+                }  
+            })
+            // get(child(dbRef, `users/${username}`)).then((snapshot) => {
+            //     if (snapshot.exists() && snapshot.val().password === password) {
+            //         loginMessage.textContent = 'Login successful!';
+            //         loginMessage.style.color = 'green';
 
-                    // 将用户名存储在本地存储中
-                    localStorage.setItem('username', username);
+            //         // 将用户名存储在本地存储中
+            //         localStorage.setItem('username', username);
 
-                    // 跳转到主页
-                    window.location.href = 'index.html';
-                } else {
-                    loginMessage.textContent = 'Invalid username or password';
-                    loginMessage.style.color = 'red';
-                }
-            }).catch((error) => {
-                console.error(error);
-                loginMessage.textContent = 'An error occurred. Please try again.';
-                loginMessage.style.color = 'red';
-            });
+            //         // 跳转到主页
+            //         window.location.href = 'index.html';
+            //     } else {
+            //         loginMessage.textContent = 'Invalid username or password';
+            //         loginMessage.style.color = 'red';
+            //     }
+            // }).catch((error) => {
+            //     console.error(error);
+            //     loginMessage.textContent = 'An error occurred. Please try again.';
+            //     loginMessage.style.color = 'red';
+            // });
         });
     }
 });

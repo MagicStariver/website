@@ -1,9 +1,3 @@
-// Initialize Firebase
-// const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
-// import { db } from "./firebase";
-// import { ref, set, push, onValue } from "firebase/database";
-
 // Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyAHW8gPuNSVstSV0ytE8oB5-_3PJKvxgMA",
@@ -23,20 +17,6 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 function writeUserData(username, email, phone, address, password) {
-    // const userdata = push(ref(db, 'userdata'));
-    // set(userdata, {
-    //   username: username,
-    //   email: email,
-    //   phone: phone,
-    //   address: address,
-    //   password: password,
-    // }).then(() => {
-    //     window.location.href = 'index.html'; // 注册成功后跳转到主页
-    // }).catch((error) => {
-    //     console.error('Error saving data:', error);
-    //     registerMessage.textContent = 'Error registering user!';
-    //     registerMessage.style.color = 'red';
-    // });
     const userData = {  
         email: email,  
         phone: phone,  

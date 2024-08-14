@@ -48,18 +48,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 更新登录状态
-    function updateLoginStatus() {
-        let username = localStorage.getItem('username');
-        if (username) {
-            userNameElement.textContent = username;
-            userMenu.classList.remove('hidden');
-            loginMenu.classList.add('hidden');
-        } else {
-            userNameElement.textContent = 'Login';
-            userMenu.classList.add('hidden');
-            loginMenu.classList.remove('hidden');
-        }
-    }
+    // function updateLoginStatus() {
+    //     let username = localStorage.getItem('username');
+    //     if (username) {
+    //         userNameElement.textContent = username;
+    //         userMenu.classList.remove('hidden');
+    //         loginMenu.classList.add('hidden');
+    //     } else {
+    //         userNameElement.textContent = 'Login';
+    //         userMenu.classList.add('hidden');
+    //         loginMenu.classList.remove('hidden');
+    //     }
+    // }
     
     // 处理注销事件
     if (logoutButton) {
