@@ -49,7 +49,7 @@
             </div>
 
             <div class="category-container" id="category">
-                <!-- <script type="module">
+                <script>
                     //get data from database and push into array
                     // category_array = ["View All"];
                     // category_array.push("Acoustic Guitars", "Electric Guitars"); //SELECT category FROM product
@@ -69,7 +69,7 @@
                             categoryContainer.innerHTML += categoryButton;
                         });
                     }
-                </script> -->
+                </script>
             </div>            
 
             <div class="product-container">
@@ -100,25 +100,17 @@
                                     id: key,
                                     ...data[key]
                                 }));
+                                const categories = new Set(products.map(product => product.category));
 
-                                const categories = new Set();
-                                products.forEach(product => {
-                                    if (product.category){
-                                        categories.add(product.category);
-                                    }
-                                })
-
-                                // const uniqueCategories = Array.from(categories);
-                                // displayCategories(uniqueCategories);
+                                displayCategories(Array.from(categories));
                                 displayProducts(products);
                             } else {
-                                // displayCategories([]);
+                                displayCategories([]);
                                 displayProducts([]); // Display nothing if there's no data
                             }
                         });
 
                         // Simulate fetching data from the database
-                       
                         function displayProducts(products){
                             const productContainer = document.getElementById("product-list");
                     
@@ -133,6 +125,28 @@
                                     </div>
                                 `;
                                 productContainer.innerHTML += productDiv;
+                            });
+
+                            const buyButtons = document.querySelectorAll('.buy-button');
+                            buyButtons.forEach(button => {
+                                button.addEventListener('click', function() {
+                                    const productElement = button.closest('.product');
+                                    const productName = productElement.querySelector('h3').textContent;
+                                    const productPrice = productElement.querySelector('p').textContent;
+
+                                    const product = {
+                                        name: productName,
+                                        price: productPrice,
+                                    };
+
+                                    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                                    cart.push(product);
+                                    localStorage.setItem('cart', JSON.stringify(cart));
+
+                                    alert('Added to cart');
+                                    location.href = "product_details.html";
+                                    displayCart(); // Update the cart display
+                                });
                             });
                         }
                     </script>

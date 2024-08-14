@@ -22,22 +22,22 @@ import { getDatabase, ref, set, push } from "https://www.gstatic.com/firebasejs/
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-function writeUserData(username, email, phone, address, password) {
-    const data = push(ref(db, 'userdata'));
-    set(data, {
-      username: username,
-      email: email,
-      phone: phone,
-      address: address,
-      password: password,
-    }).then(() => {
-        window.location.href = 'index.html'; // 注册成功后跳转到主页
-    }).catch((error) => {
-        console.error('Error saving data:', error);
-        registerMessage.textContent = 'Error registering user!';
-        registerMessage.style.color = 'red';
-    });
-}
+// function writeUserData(username, email, phone, address, password) {
+//     const data = push(ref(db, 'userdata'));
+//     set(data, {
+//       username: username,
+//       email: email,
+//       phone: phone,
+//       address: address,
+//       password: password,
+//     }).then(() => {
+//         window.location.href = 'index.html'; // 注册成功后跳转到主页
+//     }).catch((error) => {
+//         console.error('Error saving data:', error);
+//         registerMessage.textContent = 'Error registering user!';
+//         registerMessage.style.color = 'red';
+//     });
+// }
 
 document.addEventListener('DOMContentLoaded', function() {
     const registerForm = document.getElementById('registerForm');
