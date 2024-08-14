@@ -99,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('cart', JSON.stringify(cart));
 
             alert('Added to cart');
+            location.href="product_details.html";
             displayCart(); // 更新购物车显示
         });
     });
