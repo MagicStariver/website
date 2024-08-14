@@ -96,9 +96,10 @@
 
                         // Simulate fetching data from the database
                        
-                        function displayProducts(products){
+                        function displayProducts(products) {
                             const productContainer = document.getElementById("product-list");
-                    
+                            productContainer.innerHTML = ''; // Clear previous content
+
                             // Loop through the products array to generate HTML content
                             products.forEach(product => {
                                 const productDiv = `
@@ -106,10 +107,20 @@
                                         <img src="${product.image_source}" alt="${product.product_name}">
                                         <h3>${product.product_name}</h3>
                                         <p>Price: ${product.price}</p>
-                                        <button class="buy-button" data-product-id="${product.id}">View Details</button>
+                                        <button class="buy-button" data-id="${product.id}">View Details</button>
                                     </div>
                                 `;
                                 productContainer.innerHTML += productDiv;
+                            });
+
+                            // Attach event listeners after buttons are added to the DOM
+                            const buyButtons = document.querySelectorAll('.buy-button');
+
+                            buyButtons.forEach(button => {
+                                button.addEventListener('click', function() {
+                                    const productId = this.getAttribute('data-id');
+                                    location.href="product%20_details.html?id=" + productId;
+                                });
                             });
                         }
                     </script>

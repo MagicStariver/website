@@ -1,27 +1,19 @@
-//function
+document.addEventListener("DOMContentLoaded", function() {
+    // Get the product ID from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
 
-image = document.getElementById("image");
-product_name = document.getElementById("product_name");
-description = document.getElementById("desccription");
-price = document.getElementById("price");
-
-
-
-//manually set value first, then change to database
-
-image.value = "images/guitar.jpg";
-product_name.value = "Yamaha Acoustic Guitar";
-description.value = "Discover rich tones and superb craftsmanship with the Yamaha Acoustic Guitar. Featuring a solid spruce top, mahogany body, and rosewood fretboard, it offers powerful sound and lasting durability—perfect for players of all levels.";
-price.value = "$150";
-
-// product_details.js
-
-// Function to fetch and display product details
-// product_details.js
+    if (productId) {
+        // Call your function to load product details based on the ID
+        loadProductDetails(productId);
+    } else {
+        console.error("Product ID not found in URL");
+    }
+});
 
 // Function to fetch and display product details
 function loadProductDetails(productId) {
-    fetch(`get_product.php?id=${productId}`)
+    fetch(`product%20_details.html?id=${productId}`) 
         .then(response => response.json())
         .then(product => {
             if (product.error) {
@@ -29,7 +21,7 @@ function loadProductDetails(productId) {
                 return;
             }
 
-            // Display product details in HTML
+            // Display product details in HTML 这里随便你改，id对了的
             document.getElementById('product-name').textContent = product.name;
             document.getElementById('product-description').textContent = product.description;
             document.getElementById('product-price').textContent = `$${product.price}`;
@@ -42,6 +34,12 @@ function loadProductDetails(productId) {
         .catch(error => {
             console.error('Error fetching product details:', error);
         });
+}
+
+const urlParams = new URLSearchParams(window.location.search);
+const productId = urlParams.get('id');
+if (productId) {
+    loadProductDetails(productId);
 }
 
 // Function to handle adding the product to the cart

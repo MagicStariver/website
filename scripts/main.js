@@ -83,6 +83,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 购买按钮事件处理
+        buyButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                alert('Thank you for your purchase!');
+            });
+        });
+/*
     buyButtons.forEach(button => {
         button.addEventListener('click', function() {
             const productElement = button.closest('.product');
@@ -103,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
             displayCart(); // 更新购物车显示
         });
     });
-
+*/
     // 搜索功能
     searchButton.addEventListener('click', function() {
         const query = searchInput.value.toLowerCase();
