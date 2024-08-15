@@ -46,12 +46,6 @@ onValue(cartview, (snapshot)=>{
     }
 })
 
-subtractButton = document.getElementById("subtract");
-addButton = document.getElementById("add");
-amount = document.getElementById("amount");
-check_outButtons = document.getElementById("checkout");
-total_price = document.getElementById("total-price");
-
 const originalPrice = parseFloat(total_price.innerHTML.replace("RM", ""));
 
 function getCookieValue(name) {  
@@ -60,24 +54,6 @@ function getCookieValue(name) {
     if (parts.length === 2) return parts.pop().split(';').shift();  
     return null; // Returns null if the cookie isn't found  
 }
-
-addButton.addEventListener('click', function(event) {
-    let count = parseInt(amount.innerHTML);
-    count += 1;
-    amount.innerHTML = count;
-    const newTotal = originalPrice * count;
-    total_price.innerHTML = "RM" + newTotal.toFixed(2);
-});
-
-subtractButton.addEventListener('click', function(event) {
-    let count = parseInt(amount.innerHTML);
-    if (count > 1) {
-        count -= 1;
-        amount.innerHTML = count;
-        const newTotal = originalPrice * count;
-        total_price.innerHTML = "RM" + newTotal.toFixed(2);
-    }
-});
 
 check_outButtons.addEventListener('click', function(event) {
     alert("check out");
@@ -90,26 +66,23 @@ check_outButtons.addEventListener('click', function(event) {
 function displayProducts(products) {
     const listContainer = document.getElementById("cart-item-list");
     listContainer.innerHTML = ''; // Clear previous content
+    let total_price = 0; // Use let instead of const
 
-    //下面这里可以不用动了
     products.forEach(product => {
+        total_price += parseFloat(product.price); // Update total price
         const Div = `
             <div class="cart-item">
-                <img src="${product.image_source}" alt="${product.product_name}"" class="product-img" id="image">
+                <img src="${product.image_source}" alt="${product.product_name}" class="product-img" id="image">
                 <div class="product-details">
                     <p id="product_name">${product.product_name}</p>
                     <p id="price">RM${product.price}</p>
                 </div>
-                <div class="quantity-controls">
-                    <button id="subtract${product.id}" >-</button>
-                    <span id="amount${product.id}">1</span>
-                    <button id="add${product.id}">+</button>
-                </div>
             </div>
         `;
+        
         listContainer.innerHTML += Div;
-        console.log(product.id);
     });
+
+    // Update the total price element
+    document.getElementById("total-price").innerHTML = "RM" + total_price.toFixed(2);
 }
-
-
