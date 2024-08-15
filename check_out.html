@@ -6,7 +6,8 @@
     <title>Música</title>
     <link rel="stylesheet" href="styles/check_out.css">
     <link rel="stylesheet" href="styles/style.css">
-    
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js" type="module"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js" type="module"></script>
 </head>
 
 <body>
@@ -38,7 +39,8 @@
     <main>
         <h1>Check Out</h1>
         <section class="checkout-info">
-            <div class="user-details">
+            <div class="user-details"></div>
+            <div class="user-detail">
                 <p id="name"><strong>Name :</strong> yuan</p>
                 <p id="address"><strong>Address :</strong> 34, Jalan .......</p>
                 <p id="phone"><strong>Phone :</strong> 1234567890</p>
@@ -103,6 +105,6 @@
         <p>&copy; 2024 Música. All rights reserved.</p>
     </footer>
     <script src="scripts/main.js"></script>
-    <script src="scripts/check_out.js"></script>
+    <script type="module" src="scripts/check_out.js"></script>
 </body>
 </html>
