@@ -36,9 +36,11 @@ onValue(cartview, (snapshot)=>{
                     id: productId,  
                     ...allProducts[productId]  
                 }));
+                const productIds = productDetailsForCart.map(item => item.id); 
                 displayProducts(productDetailsForCart)
                 console.log(productDetailsForCart);
-                console.log(productData)
+                console.log(productIds)
+                //console.log(productData)
             }
         })
     }
@@ -99,13 +101,14 @@ function displayProducts(products) {
                     <p id="price">RM${product.price}</p>
                 </div>
                 <div class="quantity-controls">
-                    <button id="subtract" >-</button>
-                    <span id="amount">1</span>
-                    <button id="add">+</button>
+                    <button id="subtract${product.id}" >-</button>
+                    <span id="amount${product.id}">1</span>
+                    <button id="add${product.id}">+</button>
                 </div>
             </div>
         `;
         listContainer.innerHTML += Div;
+        console.log(product.id);
     });
 }
 

@@ -34,7 +34,7 @@ function writeUserData(username, email, phone, address, password) {
             // Save data under 'personal_data/username/personal_information'  
             return saveUserData(`personal_data/${username}/personal_information`, userData);  
         })  
-        .then(() => {  
+        .then(() => {
             window.location.href = 'index.html'; // Redirect after successful registration  
         })  
         .catch((error) => {  
