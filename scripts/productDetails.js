@@ -142,7 +142,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     buyNowButton.addEventListener('click', (event) => {
-        location.href="check_out.html?id=" + productId;
+        if(username == null){
+            alert('Please log in first !');
+            return;
+        }
+        else{
+            location.href="check_out.html?id=" + productId;
+        }
     });
 });
 
