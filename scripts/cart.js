@@ -51,7 +51,7 @@ document.getElementById("checkout").addEventListener('click', function(event) {
     //const productId = this.getAttribute('data-product-id');
     //location.href="check_out.html?id=" + cartId; 这里的cart id need database
     location.href='check_out.html';
-});
+}); 
 
 subtractButton = document.getElementById("subtract");
 addButton = document.getElementById("add");
