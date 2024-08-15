@@ -99,8 +99,7 @@ function generateCheckoutPage(info,product) {
     userDetailsContainer.innerHTML = `
         <p id="name"><strong>Name :</strong> ${name}</p>
         <p id="address"><strong>Address :</strong> ${info.address}</p>
-        <p id="phone"><strong>Phone :</strong> ${info.phone}</p>
-    `;
+        <p id="phone"><strong>Phone :</strong> ${info.phone}</p>`;
 
     // Populate product details
     productDetailsContainer.innerHTML = '';
