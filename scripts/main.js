@@ -16,6 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateLoginStatus();
     
+    function getCookieValue(name) {  
+        const value = `; ${document.cookie}`;  
+        const parts = value.split(`; ${name}=`);  
+        if (parts.length === 2) return parts.pop().split(';').shift();  
+        return null; // Returns null if the cookie isn't found  
+    }
+
     // 用户菜单点击事件
     userNameElement.addEventListener('click', function(event) {
         event.preventDefault();
@@ -48,10 +55,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 更新登录状态
-    /*
+    
      function updateLoginStatus() {
-         const params = new URLSearchParams(window.location.search);  
-        const username = params.get('username');  
+        //const params = new URLSearchParams(window.location.search);  
+        const username = getCookieValue('username');
         const userNameElement = document.getElementById('userName');  
         const userMenu = document.querySelector('.user-menu');  
         const loginMenu = document.querySelector('.login');  
@@ -72,11 +79,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (logoutElement) {  
         logoutElement.addEventListener('click', (event) => {  
             event.preventDefault();  
+            document.cookie = `username=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
             window.location.href = 'login.html';  
         });  
     }
-    // }
-    */
+    }
+    
     
     // 处理注销事件
     if (logoutButton) {
@@ -128,13 +136,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 */
     // 搜索功能
-    searchButton.addEventListener('click', function() {
-        const query = searchInput.value.toLowerCase();
-        products.forEach(product => {
-            const productName = product.getAttribute('data-name').toLowerCase();
-            product.style.display = productName.includes(query) ? 'block' : 'none';
-        });
-    });
+    // searchButton.addEventListener('click', function() {
+    //     const query = searchInput.value.toLowerCase();
+    //     products.forEach(product => {
+    //         const productName = product.getAttribute('data-name').toLowerCase();
+    //         product.style.display = productName.includes(query) ? 'block' : 'none';
+    //     });
+    // });
 
     // 类别筛选功能
     categoryButtons.forEach(button => {

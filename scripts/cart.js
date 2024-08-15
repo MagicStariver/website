@@ -15,6 +15,35 @@ import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/fi
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
+const username = getCookieValue('username')
+const cartview = ref (db, '/personal_data/'+ username +'/cart')
+onValue(cartview, (snapshot)=>{
+    const data = snapshot.val();
+    if(data){
+        const productkey = Object.keys(data).map(key =>({
+            id:key,
+            ...data[key]
+          }));
+        console.log(productkey);
+        const productId = productkey.map(item => item.productid); 
+        console.log(productId)
+        const productDetails = ref (db,'/product/');
+        onValue(productDetails, (snapshot)=>{
+            const productData = snapshot.val();
+            if (productData){
+                const allProducts = productData;
+                const productDetailsForCart = productId.map(productId => ({  
+                    id: productId,  
+                    ...allProducts[productId]  
+                }));
+                displayProducts(productDetailsForCart)
+                console.log(productDetailsForCart);
+                console.log(productData)
+            }
+        })
+    }
+})
+
 subtractButton = document.getElementById("subtract");
 addButton = document.getElementById("add");
 amount = document.getElementById("amount");
@@ -22,6 +51,13 @@ check_outButtons = document.getElementById("checkout");
 total_price = document.getElementById("total-price");
 
 const originalPrice = parseFloat(total_price.innerHTML.replace("RM", ""));
+
+function getCookieValue(name) {  
+    const value = `; ${document.cookie}`;  
+    const parts = value.split(`; ${name}=`);  
+    if (parts.length === 2) return parts.pop().split(';').shift();  
+    return null; // Returns null if the cookie isn't found  
+}
 
 addButton.addEventListener('click', function(event) {
     let count = parseInt(amount.innerHTML);
