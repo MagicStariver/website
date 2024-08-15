@@ -34,22 +34,19 @@
         </nav>
     </header>
     <div class="profile-container">
+        <div class="avatar-container">
+            <img src="images/profile.png" alt="User Avatar" class="user-avatar">
+        </div>
         <div class="profile-card">
             <div class="profile-details">
-                <h1 id="username">Username</h2>
+                <h1 id="username">Username</h1>
+                <h2>Email:</h2>
                 <p id="email">email@example.com</p>
-                <p id="fullname">Full Name: John Doe</p>
-                <p id="dob">Birthday: 01/01/1990</p>
+                <h2>Address:</h2>
                 <p id="address">Address: 123 Main St, City, Country</p>
             </div>
-        </div>
-        <div class="profile-actions">
-            <a href="editProfile.html" class="editprofile">EditProfile</a>
-            <button id="change-password">Change Password</button>
-            <button id="view-orders">Order History</button>
-            <button id="logout">Logout</button>
-        </div>
     </div>
     <script src="scripts/main.js"></script>
+    <script type="module" src="scripts/profile.js"></script>
 </body>
 </html>

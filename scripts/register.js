@@ -22,6 +22,7 @@ function writeUserData(username, email, phone, address, password) {
         phone: phone,  
         address: address,  
         password: password,  
+        birthday:'',
     };
     const saveUserData = (path, data) => {  
         const dataRef = ref(db, path);  
@@ -35,7 +36,7 @@ function writeUserData(username, email, phone, address, password) {
             return saveUserData(`personal_data/${username}/personal_information`, userData);  
         })  
         .then(() => {
-            window.location.href = 'index.html'; // Redirect after successful registration  
+            window.location.href = 'login.html'; // Redirect after successful registration  
         })  
         .catch((error) => {  
             console.error('Error saving data:', error);  
