@@ -105,7 +105,7 @@ function generateCheckoutPage(info,product) {
     productDetailsContainer.innerHTML = '';
     let subtotal = 0;
     product.forEach(product => {
-        subtotal += product.price * product.quantity;
+        subtotal += product.price;
         const productHTML = `
             <div class="product-item">
                 <div class="product-image">
@@ -120,14 +120,24 @@ function generateCheckoutPage(info,product) {
             productDetailsContainer.innerHTML += productHTML;
         });    
         // Populate shipping method
-        shippingMethodSelect.value = data.shippingMethod;
+        //shippingMethodSelect.value = data.shippingMethod;
     
         // Populate payment method
-        paymentMethodSelect.value = data.paymentMethod;
-    
+        //paymentMethodSelect.value = data.paymentMethod;
         // Calculate and display totals
-        const total = subtotal + data.shippingFee;
+
+        const total = subtotal + 4.9;
+        
         subtotalElement.innerHTML = `RM ${subtotal.toFixed(2)}`;
-        shippingFeeElement.innerHTML = `RM ${data.shippingFee.toFixed(2)}`;
+        shippingFeeElement.innerHTML = `RM 4.90`;
         totalElement.innerHTML = `RM ${total.toFixed(2)}`;
 }
+
+/*
+function shipping(){
+    if (shippingMethodSelect.value == "J & T") ship = 4.9
+    else if (shippingMethodSelect.value == "DHL") ship = 5.9
+    else if (shippingMethodSelect.value == "Pos Laju") ship = 6.9
+    else if (shippingMethodSelect.value == "FedEx") ship = 3.9
+    return ship;
+}*/
