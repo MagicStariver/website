@@ -26,10 +26,12 @@ onValue(persona_Info,(snapshot)=>{
             ...data[key]
         }));
         console.log('perdona infor display'+productkey);
-        alert(productkey)
+        //alert(productkey)
         displayUserInfo(productkey)
     }
 })
+
+
 
 // onValue(cartview, (snapshot)=>{
 //     const data = snapshot.val();
@@ -100,3 +102,59 @@ function displayUserInfo (info){
         console.log(product.id);
     });
 }
+
+function generateCheckoutPage(data) {
+    const userDetailsContainer = document.querySelector(".user-detail");
+    const productDetailsContainer = document.querySelector(".product-details");
+    const shippingMethodSelect = document.getElementById("shipping-method");
+    const paymentMethodSelect = document.getElementById("payment-method");
+    const subtotalElement = document.getElementById("subtotal");
+    const shippingFeeElement = document.getElementById("shipping_fee");
+    const totalElement = document.getElementById("total");
+
+    // Populate user details
+    userDetailsContainer.innerHTML = `
+        <p id="name"><strong>Name :</strong> ${data.user.name}</p>
+        <p id="address"><strong>Address :</strong> ${data.user.address}</p>
+        <p id="phone"><strong>Phone :</strong> ${data.user.phone}</p>
+    `;
+
+    // Populate product details
+    productDetailsContainer.innerHTML = '';
+    let subtotal = 0;
+    data.products.forEach(product => {
+        subtotal += product.price * product.quantity;
+
+        const productHTML = `
+            <div class="product-item">
+                <div class="product-image">
+                    <img src="${product.image_source}" alt="${product.product_name}">
+                </div>
+                <div class="product-description">
+                    <p id="product_name">${product.product_name}</p>
+                    <p id="price"><strong>RM ${product.price.toFixed(2)}</strong></p>
+                </div>
+                <div class="product-quantity">
+                    <p id="quantity">${product.quantity}</p>
+                </div>
+            </div>
+        `;
+
+        productDetailsContainer.innerHTML += productHTML;
+    });
+
+    // Populate shipping method
+    shippingMethodSelect.value = data.shippingMethod;
+
+    // Populate payment method
+    paymentMethodSelect.value = data.paymentMethod;
+
+    // Calculate and display totals
+    const total = subtotal + data.shippingFee;
+    subtotalElement.innerHTML = `RM ${subtotal.toFixed(2)}`;
+    shippingFeeElement.innerHTML = `RM ${data.shippingFee.toFixed(2)}`;
+    totalElement.innerHTML = `RM ${total.toFixed(2)}`;
+}
+
+// Call the function with your data
+generateCheckoutPage(checkoutData);
