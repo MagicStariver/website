@@ -41,14 +41,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     } else {  
                         console.log('Incorrect password!');  
                         // Notify user about incorrect password  
-                        registerMessage.textContent = 'Incorrect password!';  
-                        registerMessage.style.color = 'red';  
+                        loginMessage.textContent = 'Incorrect password!';  
+                        loginMessage.style.color = 'red';  
                     }  
                 } else {  
                     console.log('User not found!');  
                     // Notify user about non-existing username  
-                    registerMessage.textContent = 'User not found!';  
-                    registerMessage.style.color = 'red';  
+                    loginMessage.textContent = 'User not found!';  
+                    loginMessage.style.color = 'red';  
                 }  
             })
             // get(child(dbRef, `users/${username}`)).then((snapshot) => {
