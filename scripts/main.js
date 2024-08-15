@@ -48,18 +48,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 更新登录状态
-    // function updateLoginStatus() {
-    //     let username = localStorage.getItem('username');
-    //     if (username) {
-    //         userNameElement.textContent = username;
-    //         userMenu.classList.remove('hidden');
-    //         loginMenu.classList.add('hidden');
-    //     } else {
-    //         userNameElement.textContent = 'Login';
-    //         userMenu.classList.add('hidden');
-    //         loginMenu.classList.remove('hidden');
-    //     }
+    /*
+     function updateLoginStatus() {
+         const params = new URLSearchParams(window.location.search);  
+        const username = params.get('username');  
+        const userNameElement = document.getElementById('userName');  
+        const userMenu = document.querySelector('.user-menu');  
+        const loginMenu = document.querySelector('.login');  
+
+        if (username) {  
+            // Display the username  
+            userNameElement.textContent = username;  
+            userMenu.classList.remove('hidden');
+            loginMenu.classList.add('hidden');
+        } else {  
+            userNameElement.textContent = 'Login';  
+            userMenu.classList.add('hidden');
+            loginMenu.classList.remove('hidden'); 
+    }  
+
+    // Handle logout  
+    const logoutElement = document.getElementById('logout');  
+    if (logoutElement) {  
+        logoutElement.addEventListener('click', (event) => {  
+            event.preventDefault();  
+            window.location.href = 'login.html';  
+        });  
+    }
     // }
+    */
     
     // 处理注销事件
     if (logoutButton) {

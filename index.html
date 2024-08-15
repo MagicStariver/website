@@ -43,6 +43,11 @@
             const userMenu = document.querySelector('.user-menu');  
             const loginMenu = document.querySelector('.login');  
 
+            userNameElement.addEventListener('click', function(event) {
+                event.preventDefault();
+                userMenu.classList.toggle('show');
+            });
+
             if (username) {  
                 // Display the username  
                 userNameElement.textContent = username;  
@@ -59,7 +64,7 @@
             if (logoutElement) {  
                 logoutElement.addEventListener('click', (event) => {  
                     event.preventDefault();  
-                    window.location.href = 'login.html';  
+                    window.location.href = 'index.html';  
                 });  
             }
         }); 
