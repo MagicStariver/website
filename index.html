@@ -113,35 +113,53 @@
 
         const product_list = ref(db, '/product');
         onValue(product_list, (snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-                const products = Object.keys(data).map(key => ({
-                    id: key,
-                    ...data[key]
-                }));
-                const categories = new Set(products.map(product => product.category));
+    const data = snapshot.val();
+    if (data) {
+        const products = Object.keys(data).map(key => ({
+            id: key,
+            ...data[key]
+        }));
+        const categories = new Set(products.map(product => product.category));
 
-                displayCategories(Array.from(categories));
-                displayProducts(products);
+        displayCategories(Array.from(categories));
+        displayProducts(products);
 
-                // 绑定事件监听器到类别按钮
-                const categoryButtons = document.querySelectorAll('.category-button');
-                categoryButtons.forEach(button => {
-                    button.addEventListener('click', function() {
-                        const selectedCategory = this.getAttribute('data-category');
-                        if (selectedCategory === "View All") {
-                            displayProducts(products);
-                        } else {
-                            const filteredProducts = products.filter(product => product.category === selectedCategory);
-                            displayProducts(filteredProducts);
-                        }
-                    });
-                });
-            } else {
-                displayCategories([]);
-                displayProducts([]); // 如果没有数据则不显示
-            }
+        // 绑定事件监听器到类别按钮
+        const categoryButtons = document.querySelectorAll('.category-button');
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const selectedCategory = this.getAttribute('data-category');
+                if (selectedCategory === "View All") {
+                    displayProducts(products);
+                } else {
+                    const filteredProducts = products.filter(product => product.category === selectedCategory);
+                    displayProducts(filteredProducts);
+                }
+            });
         });
+
+        // 搜索按钮点击事件
+        document.getElementById('searchButton').addEventListener('click', function() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const filteredProducts = products.filter(product => 
+                product.product_name.toLowerCase().includes(searchTerm)
+            );
+            displayProducts(filteredProducts);
+        });
+
+        // 实时搜索
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const filteredProducts = products.filter(product => 
+                product.product_name.toLowerCase().includes(searchTerm)
+            );
+            displayProducts(filteredProducts);
+        });
+    } else {
+        displayCategories([]);
+        displayProducts([]); // 如果没有数据则不显示
+    }
+});
 
         function displayCategories(categories) {
             const categoryContainer = document.getElementById('category');
