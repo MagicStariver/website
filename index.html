@@ -27,8 +27,7 @@
                     <ul class="dropdown">
                         <li><a href="profile.html">Profile</a></li>
                         <li><a href="cart.html">Cart</a></li>
-                        <li><a href="trackOrder.html">TrackOrder</a></li>
-                        <li><a href="settings.html">Settings</a></li>
+                        <li><a href="trackOrder.html">Track Order</a></li>
                         <li><a href="#" id="logout">Logout</a></li>
                     </ul>
                 </li>
@@ -36,40 +35,40 @@
         </nav>
     </header>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {  
-            const params = new URLSearchParams(window.location.search);  
-            const username = params.get('username');  
-            const userNameElement = document.getElementById('userName');  
-            const userMenu = document.querySelector('.user-menu');  
-            const loginMenu = document.querySelector('.login');  
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            const username = params.get('username');
+            const userNameElement = document.getElementById('userName');
+            const userMenu = document.querySelector('.user-menu');
+            const loginMenu = document.querySelector('.login');
 
             userNameElement.addEventListener('click', function(event) {
                 event.preventDefault();
                 userMenu.classList.toggle('show');
             });
 
-            if (username) {  
-                // Display the username  
-                userNameElement.textContent = username;  
+            if (username) {
+                // 显示用户名
+                userNameElement.textContent = username;
                 userMenu.classList.remove('hidden');
                 loginMenu.classList.add('hidden');
-            } else {  
-                userNameElement.textContent = 'Login';  
+            } else {
+                userNameElement.textContent = 'Login';
                 userMenu.classList.add('hidden');
-                loginMenu.classList.remove('hidden'); 
-            }  
-
-            // Handle logout  
-            const logoutElement = document.getElementById('logout');  
-            if (logoutElement) {  
-                logoutElement.addEventListener('click', (event) => {  
-                    event.preventDefault();  
-                    document.cookie = `username=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
-                    window.location.href = 'index.html';  
-                });  
+                loginMenu.classList.remove('hidden');
             }
-        }); 
-    </script>  
+
+            // 处理注销
+            const logoutElement = document.getElementById('logout');
+            if (logoutElement) {
+                logoutElement.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    document.cookie = `username=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+                    window.location.href = 'index.html';
+                });
+            }
+        });
+    </script>
     <main>
         <section class="banner">
             <h2>Welcome to Música</h2>
@@ -107,7 +106,7 @@
         };
 
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-        import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
@@ -125,7 +124,7 @@
                 displayCategories(Array.from(categories));
                 displayProducts(products);
 
-                // Attach event listeners to category buttons
+                // 绑定事件监听器到类别按钮
                 const categoryButtons = document.querySelectorAll('.category-button');
                 categoryButtons.forEach(button => {
                     button.addEventListener('click', function() {
@@ -140,15 +139,15 @@
                 });
             } else {
                 displayCategories([]);
-                displayProducts([]); // Display nothing if there's no data
+                displayProducts([]); // 如果没有数据则不显示
             }
         });
 
         function displayCategories(categories) {
             const categoryContainer = document.getElementById('category');
-            categoryContainer.innerHTML = ''; // Clear existing categories
+            categoryContainer.innerHTML = ''; // 清除已有类别
 
-            // Add "View All" option at the beginning
+            // 在开头添加“查看全部”选项
             categoryContainer.innerHTML += "<button class=\"category-button\" data-category=\"View All\">View All</button>";
 
             categories.forEach(category => {
@@ -159,9 +158,9 @@
 
         function displayProducts(products) {
             const productContainer = document.getElementById("product-list");
-            productContainer.innerHTML = ''; // Clear previous content
+            productContainer.innerHTML = ''; // 清除之前的内容
 
-            // Loop through the products array to generate HTML content
+            // 遍历产品数组生成HTML内容
             products.forEach(product => {
                 const productDiv = `
                     <div class="product" data-category="${product.category}" data-name="${product.product_name}">
@@ -180,7 +179,7 @@
             buyButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const productId = this.getAttribute('data-product-id');
-                    location.href="product%20_details.html?id=" + productId;
+                    location.href = `product%20_details.html?id=${productId}`;
                 });
             });
         }
