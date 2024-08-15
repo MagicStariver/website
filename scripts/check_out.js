@@ -49,6 +49,13 @@ if (!name) {
     });  
 }
 
+document.getElementById("check_out").addEventListener('click', function(event) {
+    //alert("check out");
+    //const productId = this.getAttribute('data-product-id');
+    //location.href="check_out.html?id=" + cartId; 这里的cart id need database
+    location.href="trackOrder.html";
+});
+
 function getCookieValue(name) {  
     const value = `; ${document.cookie}`;  
     const parts = value.split(`; ${name}=`);  
