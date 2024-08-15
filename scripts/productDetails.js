@@ -128,17 +128,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const username = getCookieValue('username');  
 
     addToCartButton.addEventListener('click', function(event) {
-        //insert into cart item DATABASE 放这边
-        location.href="cart.html?id=" + productId;
-
         if(username == null){
             alert('Please log in first !');
             return;
         }
-        const addtocart = push(ref(db,'/personal_data/'+username+'/cart'));
-        set(addtocart,{
-            productid: productId,
-        })
+        else{
+            const addtocart = push(ref(db,'/personal_data/'+username+'/cart'));
+            set(addtocart,{
+                productid: productId,
+                })
+            location.href="cart.html?id=" + productId;
+        }
     });
     
     buyNowButton.addEventListener('click', (event) => {
