@@ -37,7 +37,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (password === storedPassword) {  
                         console.log('Login successful!');  
                         // Redirect to homepage or perform necessary login success actions  
-                        window.location.href = `index.html?username=${encodeURIComponent(username)}`;   
+                        document.cookie = `username=${encodeURIComponent(username)}; path=/;`; 
+                        window.location.href = `index.html?username=${encodeURIComponent(username)}`;
+                        //window.location.href = `index.html`;
                     } else {  
                         console.log('Incorrect password!');  
                         // Notify user about incorrect password  

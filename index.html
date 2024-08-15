@@ -35,7 +35,7 @@
             </ul>
         </nav>
     </header>
-    <script>  
+    <script>
         document.addEventListener('DOMContentLoaded', function() {  
             const params = new URLSearchParams(window.location.search);  
             const username = params.get('username');  
@@ -64,6 +64,7 @@
             if (logoutElement) {  
                 logoutElement.addEventListener('click', (event) => {  
                     event.preventDefault();  
+                    document.cookie = `username=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
                     window.location.href = 'index.html';  
                 });  
             }

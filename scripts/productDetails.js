@@ -111,6 +111,13 @@ function buyNow() {
 }
     */
 
+function getCookieValue(name) {  
+    const value = `; ${document.cookie}`;  
+    const parts = value.split(`; ${name}=`);  
+    if (parts.length === 2) return parts.pop().split(';').shift();  
+    return null; // Returns null if the cookie isn't found  
+}  
+
 // Attach event listeners to buttons
 document.addEventListener('DOMContentLoaded', () => {
     //const productId = 1; // Replace with dynamic product ID if necessary
@@ -118,10 +125,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const addToCartButton = document.getElementById('add-to-cart');
     const buyNowButton = document.getElementById('buy-now');
-    
+    const username = getCookieValue('username');  
+
     addToCartButton.addEventListener('click', function(event) {
         //insert into cart item DATABASE 放这边
         location.href="cart.html?id=" + productId;
+
+        if(username == null){
+            alert('Please log in first !');
+            return;
+        }
+        const addtocart = push(ref(db,'/personal_data/'+username+'/cart'));
+        set(addtocart,{
+            productid: productId,
+        })
     });
     
     buyNowButton.addEventListener('click', (event) => {

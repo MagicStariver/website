@@ -1,3 +1,20 @@
+const firebaseConfig = {
+    apiKey: "AIzaSyAHW8gPuNSVstSV0ytE8oB5-_3PJKvxgMA",
+    authDomain: "muzica-93e9c.firebaseapp.com",
+    projectId: "muzica-93e9c",
+    storageBucket: "muzica-93e9c.appspot.com",
+    messagingSenderId: "559137569600",
+    appId: "1:559137569600:web:081ec42350a9f8099658a5",
+    measurementId: "G-G5MCSMD8H0",
+    databaseURL: "https://muzica-93e9c-default-rtdb.firebaseio.com/"
+};
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
 subtractButton = document.getElementById("subtract");
 addButton = document.getElementById("add");
 amount = document.getElementById("amount");
@@ -24,7 +41,6 @@ subtractButton.addEventListener('click', function(event) {
     }
 });
 
-
 check_outButtons.addEventListener('click', function(event) {
     alert("check out");
     //const productId = this.getAttribute('data-product-id');
@@ -32,10 +48,7 @@ check_outButtons.addEventListener('click', function(event) {
     location.href="check_out.html";
 });
 
-
-
 //database放这里， 我大概从index html抄来的
-
 function displayProducts(products) {
     const listContainer = document.getElementById("cart-item-list");
     listContainer.innerHTML = ''; // Clear previous content
