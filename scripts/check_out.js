@@ -1,3 +1,5 @@
+let productDetailsForCart = [];
+
 const firebaseConfig = {
     apiKey: "AIzaSyAHW8gPuNSVstSV0ytE8oB5-_3PJKvxgMA",
     authDomain: "muzica-93e9c.firebaseapp.com",
@@ -10,7 +12,7 @@ const firebaseConfig = {
 };
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
@@ -36,12 +38,12 @@ if (!name) {
                 onValue(productDetails, (productSnapshot) => {  
                     const productData = productSnapshot.val(); 
                     if (productData) {  
-                        const productDetailsForCart = productIds.map(productId => ({  
+                        productDetailsForCart = productIds.map(productId => ({  
                             id: productId,  
                             ...productData[productId]  
                         }));
                         console.log(productDetailsForCart) 
-                        generateCheckoutPage(personalData, productDetailsForCart);  
+                        generateCheckoutPage(personalData, productDetailsForCart);
                     }  
                 });  
             }  
@@ -49,12 +51,33 @@ if (!name) {
     });  
 }
 
-document.getElementById("check_out").addEventListener('click', function(event) {
-    //alert("check out");
-    //const productId = this.getAttribute('data-product-id');
-    //location.href="check_out.html?id=" + cartId; 这里的cart id need database
-    location.href="trackOrder.html";
-});
+document.getElementById("check_out").addEventListener('click', function(event) {  
+    if (productDetailsForCart.length > 0) {  
+        const promises = productDetailsForCart.map(product => {  
+            const paymentref = push(ref(db, '/personal_data/' + name + '/order'));  
+            return set(paymentref, {  
+                productName: product.product_name,  
+                image_source: product.image_source,  
+                status: 'payment'  
+            });  
+        });  
+        Promise.all(promises)  
+            .then(() => {  
+                console.log("All products saved successfully.");  
+                const deleteCart = ref(db, '/personal_data/' + name + '/cart');  
+                return remove(deleteCart);  // Remove the cart after saving all products  
+            })  
+            .then(() => {  
+                console.log("Cart deleted successfully.");  
+                location.href = "trackOrder.html";  
+            })  
+            .catch(error => {  
+                console.error("Error processing checkout:", error);  
+            });  
+    } else {  
+        console.log('No data available to process order');  
+    }  
+}); 
 
 function getCookieValue(name) {  
     const value = `; ${document.cookie}`;  
