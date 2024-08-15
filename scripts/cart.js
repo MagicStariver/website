@@ -46,6 +46,13 @@ onValue(cartview, (snapshot)=>{
     }
 })
 
+document.getElementById("checkout").addEventListener('click', function(event) {
+    alert("check out");
+    //const productId = this.getAttribute('data-product-id');
+    //location.href="check_out.html?id=" + cartId; 这里的cart id need database
+    location.href='check_out.html';
+});
+
 subtractButton = document.getElementById("subtract");
 addButton = document.getElementById("add");
 amount = document.getElementById("amount");
@@ -77,13 +84,6 @@ subtractButton.addEventListener('click', function(event) {
         const newTotal = originalPrice * count;
         total_price.innerHTML = "RM" + newTotal.toFixed(2);
     }
-});
-
-check_outButtons.addEventListener('click', function(event) {
-    alert("check out");
-    //const productId = this.getAttribute('data-product-id');
-    //location.href="check_out.html?id=" + cartId; 这里的cart id need database
-    location.href="check_out.html";
 });
 
 //database放这里， 我大概从index html抄来的
