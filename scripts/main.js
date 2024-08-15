@@ -1,22 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const cartItemsContainer = document.getElementById('cart-items');
-    const totalPriceElement = document.getElementById('total-price');
     const buyButtons = document.querySelectorAll('.buy-button');
-    const searchButton = document.getElementById('searchButton');
-    const searchInput = document.getElementById('searchInput');
     const products = document.querySelectorAll('.product');
     const categoryButtons = document.querySelectorAll('.category-button');
     const productsLink = document.querySelector('header nav ul li:nth-child(2) a');
     const mybutton = document.getElementById("back-to-top");
     const userMenu = document.querySelector('.user-menu');
-    const loginMenu = document.querySelector('.login');
     const userNameElement = document.getElementById('userName');
     const logoutButton = document.getElementById('logout');
     const settingsLink = document.getElementById('settingsLink');
 
+    //const cartItemsContainer = document.getElementById('cart-items');
+    //const totalPriceElement = document.getElementById('total-price');
+    //const searchButton = document.getElementById('searchButton');
+    //const searchInput = document.getElementById('searchInput'); 
+    //const loginMenu = document.querySelector('.login');    
+
     updateLoginStatus();
     
-    function getCookieValue(name) {  
+    function getCookieValue(name) {
         const value = `; ${document.cookie}`;  
         const parts = value.split(`; ${name}=`);  
         if (parts.length === 2) return parts.pop().split(';').shift();  
@@ -30,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 处理购物车显示
-    function displayCart() {
+    /*function displayCart() {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         if (cart.length === 0) {
             cartItemsContainer.innerHTML = '<p>Haven\'t chosen product</p>';
@@ -52,11 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
             totalPriceElement.innerHTML = `Total Price: $${total.toFixed(2)}`;
         }
-    }
+    }*/
 
     // 更新登录状态
     
-     function updateLoginStatus() {
+    function updateLoginStatus() {
         //const params = new URLSearchParams(window.location.search);  
         const username = getCookieValue('username');
         const userNameElement = document.getElementById('userName');  

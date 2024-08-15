@@ -53,25 +53,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     loginMessage.style.color = 'red';  
                 }  
             })
-            // get(child(dbRef, `users/${username}`)).then((snapshot) => {
-            //     if (snapshot.exists() && snapshot.val().password === password) {
-            //         loginMessage.textContent = 'Login successful!';
-            //         loginMessage.style.color = 'green';
-
-            //         // 将用户名存储在本地存储中
-            //         localStorage.setItem('username', username);
-
-            //         // 跳转到主页
-            //         window.location.href = 'index.html';
-            //     } else {
-            //         loginMessage.textContent = 'Invalid username or password';
-            //         loginMessage.style.color = 'red';
-            //     }
-            // }).catch((error) => {
-            //     console.error(error);
-            //     loginMessage.textContent = 'An error occurred. Please try again.';
-            //     loginMessage.style.color = 'red';
-            // });
         });
     }
 });

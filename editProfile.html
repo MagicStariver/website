@@ -6,6 +6,9 @@
     <title>User Profile - Música</title>
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/EditProfile.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js" type="module"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js" type="module"></script>
 </head>
 <body>
     <header>
@@ -46,7 +49,7 @@
                 <input type="email" id="email" name="email" value="">                
 
                 <label for="fullName">Full Name:</label>
-                <input type="text" id="fullName" name="fullName" value="John Doe">
+                <input type="text" id="fullName" name="fullName" value="">
 
                 <label for="birthday">Birthday:</label>
                 <input type="date" id="birthday" name="birthday" value="1989-01-01">
@@ -66,7 +69,6 @@
         <p>&copy; 2024 Música. All rights reserved.</p>
     </footer>
     <script src="scripts/main.js"></script>
-    <script src="scripts/editprofile.js"></script>
-    <script src="scripts/firebase.js"></script>
+    <script type="module" src="scripts/editprofile.js"></script>
 </body>
 </html>
