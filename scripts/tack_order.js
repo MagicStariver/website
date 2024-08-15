@@ -16,15 +16,17 @@ import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/fi
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
+
+
 const username = getCookieValue('username')
 console.log(username);
 const getorder = ref(db, '/personal_data/' + username + '/order')
-onValue(getorder, (snapshot) => {  
+onValue(getorder, (snapshot) => {
     const data = snapshot.val();  
-    if (data) {  
-        console.log( data);  
+    if (data) {
+        console.log( data);
         displayOrderStatus(data);
-    } else {  
+    } else {
         console.log("No data in cart for this user.");  
     }  
 }, (error) => {  
@@ -39,61 +41,57 @@ function getCookieValue(name) {
 }
 
 function displayOrderStatus(orderimage) {
-    orderimage.array.forEach(image => {
-        console.log('test'+image.image_source)
-    }); 
+    const productContainer = document.getElementById("product-list");
+    productContainer.innerHTML = ''; 
+    for (const imageKey in orderimage) {
+        const image = orderimage[imageKey];
+        const productDiv = `
+            <div>
+                <img src="${image.image_source}" alt="${image.productName}">
+                <p id="product_name">${image.productName}</p>
+            </div>
+        `;
+        productContainer.innerHTML += productDiv;
+        tracking(image.status);
+        console.log(image.status)
+    }
 }
 
-//下面的我hide 起来 没有动你的， 然后就是尝试去写了function 想去console 看看那个image_source 会不会一个一个display 出来 但是我放弃了
-//你要的那个status在databse 叫status
-//image 就是image_source
-//弄那个display 的然后 你放不到image 我再来弄
-
-// product_name = document.getElementById("product_name");
-// payment = document.getElementById("payment");
-// packing = document.getElementById("packing");
-// delivery = document.getElementById("delivery");
-// arrived = document.getElementById("arrived");
-
-// order_status="delivery";
-
-
-
-// if (order_status=="arrived"){
-//     payment.style="border: 2px solid #130505;" //solid line
-//     packing.style="border: 2px solid #130505;" //solid line
-//     delivery.style="border: 2px solid #130505;" //solid line
-//     arrived.style="border: 2px solid #130505;" //solid line
-//     document.getElementById("loader1").classList.add("stop-animation");
-//     document.getElementById("loader2").classList.add("stop-animation");
-//     document.getElementById("loader3").classList.add("stop-animation");
-// }
-// else if (order_status=="delivery"){
-//     payment.style="border: 2px solid #130505;" //solid line
-//     packing.style="border: 2px solid #130505;" //solid line
-//     delivery.style="border: 2px solid #130505;" //solid line
-//     arrived.style="border: 2px dashed #130505;" //dashed line
-//     document.getElementById("loader1").classList.add("stop-animation");
-//     document.getElementById("loader2").classList.add("stop-animation");
-//     document.getElementById("loader3").classList.remove("stop-animation");
-// }
-// else if (order_status=="packing"){
-//     payment.style="border: 2px solid #130505;" //solid line
-//     packing.style="border: 2px solid #130505;" //solid line
-//     delivery.style="border: 2px dashed #130505;" //dashed line
-//     arrived.style="border: 2px dashed #130505;" //dashed line
-//     document.getElementById("loader1").classList.add("stop-animation");
-//     document.getElementById("loader2").classList.remove("stop-animation");
-//     document.getElementById("loader3").classList.remove("stop-animation");
-// }
-// else if (order_status=="payment"){
-//     payment.style="border: 2px solid #130505;" //solid line
-//     packing.style="border: 2px dashed #130505;" //dashed line
-//     delivery.style="border: 2px dashed #130505;" //dashed line
-//     arrived.style="border: 2px dashed #130505;" //dashed line
-//     document.getElementById("loader1").classList.remove("stop-animation");
-//     document.getElementById("loader2").classList.remove("stop-animation");
-//     document.getElementById("loader3").classList.remove("stop-animation");
-// }
-
-//product_name.innerHTML="guitar"
+function tracking (order_status) {
+    if (order_status=="arrived"){
+        payment.style="border: 2px solid #130505;" //solid line
+        packing.style="border: 2px solid #130505;" //solid line
+        delivery.style="border: 2px solid #130505;" //solid line
+        arrived.style="border: 2px solid #130505;" //solid line
+        document.getElementById("loader1").classList.add("stop-animation");
+        document.getElementById("loader2").classList.add("stop-animation");
+        document.getElementById("loader3").classList.add("stop-animation");
+    }
+    else if (order_status=="delivery"){
+        payment.style="border: 2px solid #130505;" //solid line
+        packing.style="border: 2px solid #130505;" //solid line
+        delivery.style="border: 2px solid #130505;" //solid line
+        arrived.style="border: 2px dashed #130505;" //dashed line
+        document.getElementById("loader1").classList.add("stop-animation");
+        document.getElementById("loader2").classList.add("stop-animation");
+        document.getElementById("loader3").classList.remove("stop-animation");
+    }
+    else if (order_status=="packing"){
+        payment.style="border: 2px solid #130505;" //solid line
+        packing.style="border: 2px solid #130505;" //solid line
+        delivery.style="border: 2px dashed #130505;" //dashed line
+        arrived.style="border: 2px dashed #130505;" //dashed line
+        document.getElementById("loader1").classList.add("stop-animation");
+        document.getElementById("loader2").classList.remove("stop-animation");
+        document.getElementById("loader3").classList.remove("stop-animation");
+    }
+    else if (order_status=="payment"){
+        payment.style="border: 2px solid #130505;" //solid line
+        packing.style="border: 2px dashed #130505;" //dashed line
+        delivery.style="border: 2px dashed #130505;" //dashed line
+        arrived.style="border: 2px dashed #130505;" //dashed line
+        document.getElementById("loader1").classList.remove("stop-animation");
+        document.getElementById("loader2").classList.remove("stop-animation");
+        document.getElementById("loader3").classList.remove("stop-animation");
+    }
+}

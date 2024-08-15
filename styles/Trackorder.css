@@ -1,21 +1,28 @@
 .container {
-    display: flex;
     justify-content: center;
     align-items: center;
+    margin: 100px;
     min-height: 80vh;
     padding: 20px;
 }
 
 .product-info {
     text-align: center;
-    margin-right: 50px; /* Add some margin between product and tracking steps */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto; /* Add some margin between product and tracking steps */
 }
 
 .product-info img {
-    width: 150px;
+    max-width: 100%;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
     height: 150px;
-    background-color: #333;
-    margin-bottom: 10px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
 }
 
 .order-tracking {
