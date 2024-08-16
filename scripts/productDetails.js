@@ -45,7 +45,7 @@ function loadProductDetails(productId) {
         document.getElementById('product-name').textContent = product.product_name;
         console.log(product.product_name)
         document.getElementById('product-description').textContent = product.product_details;
-        document.getElementById('product-price').textContent = `$${product.price}`;
+        document.getElementById('product-price').textContent = `RM${product.price}`;
         document.getElementById('product-image').src = product.image_source;
         document.getElementById('product-image').alt = product.product_name;
 
