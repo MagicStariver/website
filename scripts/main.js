@@ -9,12 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoutButton = document.getElementById('logout');
     const settingsLink = document.getElementById('settingsLink');
 
-    //const cartItemsContainer = document.getElementById('cart-items');
-    //const totalPriceElement = document.getElementById('total-price');
-    //const searchButton = document.getElementById('searchButton');
-    //const searchInput = document.getElementById('searchInput'); 
-    //const loginMenu = document.querySelector('.login');    
-
     updateLoginStatus();
     
     function getCookieValue(name) {
@@ -29,31 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
         userMenu.classList.toggle('show');
     });
-
-    // 处理购物车显示
-    /*function displayCart() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        if (cart.length === 0) {
-            cartItemsContainer.innerHTML = '<p>Haven\'t chosen product</p>';
-            totalPriceElement.innerHTML = 'Total Price: $0.00';
-        } else {
-            let total = 0;
-            cartItemsContainer.innerHTML = cart.map(item => {
-                const price = parseFloat(item.price.replace('$', ''));
-                total += price;
-                return `
-                    <div class="cart-item">
-                        <div class="item-details">
-                            <h3>${item.name}</h3>
-                            <p>Price: ${item.price}</p>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-    
-            totalPriceElement.innerHTML = `Total Price: $${total.toFixed(2)}`;
-        }
-    }*/
 
     // 更新登录状态
     
@@ -114,36 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Thank you for your purchase!');
             });
         });
-/*
-    buyButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const productElement = button.closest('.product');
-            const productName = productElement.querySelector('h3').textContent;
-            const productPrice = productElement.querySelector('p').textContent;
-
-            const product = {
-                name: productName,
-                price: productPrice,
-            };
-
-            // const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            // cart.push(product);
-            // localStorage.setItem('cart', JSON.stringify(cart));
-
-            alert('Added to cart');
-            location.href="product_details.html";
-            displayCart(); // 更新购物车显示
-        });
-    });
-*/
-    // 搜索功能
-    // searchButton.addEventListener('click', function() {
-    //     const query = searchInput.value.toLowerCase();
-    //     products.forEach(product => {
-    //         const productName = product.getAttribute('data-name').toLowerCase();
-    //         product.style.display = productName.includes(query) ? 'block' : 'none';
-    //     });
-    // });
 
     // 类别筛选功能
     categoryButtons.forEach(button => {
